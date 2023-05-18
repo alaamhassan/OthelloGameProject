@@ -1,8 +1,6 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
-#include <QGraphicsScene>
-#include <QGraphicsRectItem>
-#include <QGraphicsView>
+
 
 GameWindow::GameWindow(QWidget *parent) :
     QDialog(parent),
@@ -10,8 +8,20 @@ GameWindow::GameWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-//    //creating a scene
-//    QGraphicsScene* scene =new QGraphicsScene() ;
+    //intiailizing a scene
+     GameScene =new QGraphicsScene(this) ;
+
+     ui->graphicsView->setScene(GameScene);
+
+     QBrush GreenBrush(Qt::green);
+     QPen BlackPen(Qt::black);
+     BlackPen.setWidth(1);
+     GameBoardRectangle =GameScene->addRect(10,10,100,100,BlackPen,GreenBrush);
+
+
+
+
+
 
 //    //creating an iteam to add it to the scene
 //    QGraphicsRectItem * GameBoardRect =new QGraphicsRectItem();

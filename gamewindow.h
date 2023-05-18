@@ -21,7 +21,8 @@ public:
 private:
     Ui::GameWindow *ui;
     QGraphicsScene* GameScene;
-    َQGraphicsRectItem* GameBoardRectangle ;
+    QGraphicsRectItem* GameBoardRectangle;
+
 
 };
 
