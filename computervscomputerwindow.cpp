@@ -96,10 +96,19 @@ ComputerVsComputerWindow::ComputerVsComputerWindow(QWidget *parent) :
     ui->backButton->setStyleSheet(BackAndStartStyleSheet);
     ui->nextButton->setStyleSheet(BackAndStartStyleSheet);
 
-    ui->label->setStyleSheet("font-size:20px");
-    ui->label->setStyleSheet("color: rgb(75, 150, 0)");
-    ui->label_2->setStyleSheet("font-size:20px");
-    ui->label_2->setStyleSheet("color: rgb(75, 150, 0)");
+    QString lebelStyleSheet=  "background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(4, 137, 26, 255), stop:1 rgba(255, 255, 255, 255));"
+                              "color:rgb(0, 63, 0);"
+                              "border-radius:5px;"
+                              "border:1px black;"
+                              "margin-top:10px;"
+                              "margin-bottom:5px;"
+                              "font-size:20px;";
+
+    ui->label->setStyleSheet(lebelStyleSheet);
+    ui->label->setAlignment(Qt::AlignCenter);
+
+    ui->label_2->setStyleSheet(lebelStyleSheet);
+    ui->label_2->setAlignment(Qt::AlignCenter);
 
 }
 

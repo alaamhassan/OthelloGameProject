@@ -26,39 +26,42 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>50</y>
-      <width>631</width>
-      <height>121</height>
+      <x>1030</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 163, 0);</string>
+    </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;h1 style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:130pt; font-weight:700; color:##FFFFFF&quot;&gt;Choose Your Game&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;h1 style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:130pt; font-weight:700; color:##FFFFFF&quot;&gt;   Choose Your Game&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="AlphaBeta">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>330</y>
+      <x>870</x>
+      <y>400</y>
       <width>341</width>
-      <height>101</height>
+      <height>141</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">font-size:30px;</string>
     </property>
     <property name="text">
-     <string>Person VS Computer</string>
+     <string>AlphaBetaIterative</string>
     </property>
    </widget>
    <widget class="QPushButton" name="AlphaBetaIterative">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>510</y>
-      <width>341</width>
-      <height>101</height>
+      <x>1050</x>
+      <y>0</y>
+      <width>20</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -74,10 +77,10 @@
    <widget class="QPushButton" name="MinMaxButton">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>150</y>
-      <width>341</width>
-      <height>101</height>
+      <x>1010</x>
+      <y>0</y>
+      <width>20</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="styleSheet">

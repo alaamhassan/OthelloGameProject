@@ -2,4 +2,12 @@
     <qresource prefix="/backGroundImages">
         <file>HomePage/bluredImage.jpg</file>
     </qresource>
+    <qresource prefix="/homePage">
+        <file>HomePage/homePageImage.png</file>
+        <file>HomePage/background2.png</file>
+    </qresource>
+    <qresource prefix="/BoardDisks">
+        <file>OthelloDisks/BlackOthelloDisk.png</file>
+        <file>OthelloDisks/WhiteOthelloDisk.png</file>
+    </qresource>
 </RCC>

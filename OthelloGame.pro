@@ -9,14 +9,20 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    boardsquare.cpp \
     computervscomputerwindow.cpp \
+    gameboard.cpp \
     gamewindow.cpp \
+    getandsindresponsemiddleware.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    boardsquare.h \
     computervscomputerwindow.h \
+    gameboard.h \
     gamewindow.h \
+    getandsindresponsemiddleware.h \
     mainwindow.h
 
 FORMS += \

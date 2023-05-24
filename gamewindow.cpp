@@ -1,6 +1,7 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
-
+#include <QGraphicsView>
+#include<QDebug>
 
 GameWindow::GameWindow(QWidget *parent) :
     QDialog(parent),
@@ -8,34 +9,17 @@ GameWindow::GameWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //intiailizing a scene
-     GameScene =new QGraphicsScene(this) ;
-
-     ui->graphicsView->setScene(GameScene);
-
-     QBrush GreenBrush(Qt::green);
-     QPen BlackPen(Qt::black);
-     BlackPen.setWidth(1);
-     GameBoardRectangle =GameScene->addRect(10,10,100,100,BlackPen,GreenBrush);
+    gameBoard =new GameBoard();
 
 
 
+    ui->graphicsView->setScene(gameBoard->GetBoardScene());
 
+    ui->graphicsView->setMouseTracking(true);
+    setMouseTracking(true);
+    qDebug()<<"mouse:"<<(ui->graphicsView->hasMouseTracking());
 
-
-//    //creating an iteam to add it to the scene
-//    QGraphicsRectItem * GameBoardRect =new QGraphicsRectItem();
-
-//    GameBoardRect->setRect(0,0,100,100) ;
-
-//    scene->addItem(GameBoardRect);
-
-//    //add visualization
-
-//    QGraphicsView * Gameview =new QGraphicsView(scene);
-
-//    //to make it visable
-//    Gameview->show();
+    ui->graphicsView->show();
 
 
 
@@ -43,5 +27,20 @@ GameWindow::GameWindow(QWidget *parent) :
 
 GameWindow::~GameWindow()
 {
-    delete ui;
+delete ui;
 }
+
+//void mousePressEvent(QGraphicsSceneMouseEvent *e)
+//{
+//qDebug() << "You clicked ";
+////QGraphicsView::mousePressEvent(event);
+
+//}
+
+//void GameWindow::mousePressEvent(QGraphicsSceneMouseEvent *e)
+//{
+//qDebug() << "You clicked ";
+//}
+
+
+
