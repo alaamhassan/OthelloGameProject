@@ -1,5 +1,5 @@
 #include "boardsquare.h"
-
+#include"QTimer"
 
 BoardSquare::BoardSquare(int x_coordinate,int y_coordinate,QString SquareName)//:QGraphicsRectItem(parent)
 {
@@ -13,7 +13,10 @@ BoardSquare::BoardSquare(int x_coordinate,int y_coordinate,QString SquareName)//
     pressed =false;
     isSquareValidMove=false;
 
-    playerTurn=0;
+    //playerTurn=0;
+
+
+    SqaureState=0;
 
     setRect(QRectF(x_coordinate,y_coordinate,width,hight));
 
@@ -30,18 +33,38 @@ void BoardSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     Q_UNUSED(widget);
 
     QRectF rec=boundingRect().toRect();
-    QBrush brush(Qt::blue);
+    QBrush brush("#006325");
 
     if(pressed)
     {
-        if(isSquareValidMove)this->DrawDisk();
+        if(isSquareValidMove)
+        {
+
+            this->DrawDisk();
+            this->setSquareValidMove(0);
+
+        }
         else
-            brush.setColor(Qt::red);
+        {
+            brush.setColor("#D92D20");//Qt::red
+
+            // Create a timer and set its interval to 3 seconds
+            QTimer timer;
+            timer.setInterval(500);
+
+            // Connect the timer's timeout signal to a slot that changes the color back
+            connect(&timer, &QTimer::timeout, [&brush]() {
+                brush.setColor("#006325"); // or any other color you want
+            });
+
+            // Start the timer
+            timer.start();
+        }
 
     }
     else
     {
-        if(isSquareValidMove)brush.setColor(Qt::yellow);
+        if(isSquareValidMove)brush.setColor("#F79009");//Qt::yellow
         else
             brush.setColor("#006325");
     }
@@ -56,8 +79,8 @@ void BoardSquare::DrawDisk()
 {
     QString DiskImagePath;
 
-    if(SqaureState==1)DiskImagePath=":/BoardDisks/OthelloDisks/BlackOthelloDisk-removebg-preview.jpg";//":/BoardDisks/OthelloDisks/BlackOthelloDisk.png";
-    else if (SqaureState==-1)DiskImagePath=":/BoardDisks/OthelloDisks/WhiteOthelloDisk-removebg-preview (1).jpg";//":/BoardDisks/OthelloDisks/WhiteOthelloDisk.png";
+   if(SqaureState==1)DiskImagePath=":/BoardDisks/OthelloDisks/DarkDisk.jpg";
+   else if (SqaureState==-1)DiskImagePath=":/BoardDisks/OthelloDisks/WhiteDisk.jpg";
 
     DiskImage->setPixmap(DiskImagePath);
 
@@ -67,9 +90,9 @@ void BoardSquare::DrawDisk()
     DiskImage->show();
 }
 
-void BoardSquare::setSquareValidMove()
+void BoardSquare::setSquareValidMove(bool isSquareValid)
 {
-    isSquareValidMove=true;
+    isSquareValidMove=isSquareValid;
 }
 
 void BoardSquare::setSquareState(int sqaureState)
@@ -88,6 +111,11 @@ void BoardSquare::RestartSquareToInitial()
 
 }
 
+int BoardSquare::getSquareState()
+{
+    return SqaureState;
+}
+
 
 void BoardSquare::mousePressEvent(QGraphicsSceneMouseEvent *ev)
 {
@@ -96,17 +124,18 @@ void BoardSquare::mousePressEvent(QGraphicsSceneMouseEvent *ev)
 
     qDebug()<<"reach the press event";
 
-    //emit sendSignalsToTheGameBoard("Switch turns",playerTurn);
+    if(isSquareValidMove)
+    {
 
-    this->playerTurn= ((playerTurn+1)%2);
 
-    emit sendSignalsToTheGameBoard("Switch turns",playerTurn);
+    emit sendSignalsToTheGameBoard("Switch turns",this->SquareName);
+    }
 
     pressed=true;
     update();
 
    QGraphicsItem::mousePressEvent(ev);
-   //qDebug()<<response[0]<<" "<<response[1];
+
 
 }
 

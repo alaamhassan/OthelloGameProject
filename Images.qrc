@@ -7,9 +7,7 @@
         <file>HomePage/background2.png</file>
     </qresource>
     <qresource prefix="/BoardDisks">
-        <file>OthelloDisks/BlackOthelloDisk.png</file>
-        <file>OthelloDisks/WhiteOthelloDisk.png</file>
-        <file>OthelloDisks/BlackOthelloDisk-removebg-preview.jpg</file>
-        <file>OthelloDisks/WhiteOthelloDisk-removebg-preview (1).jpg</file>
+        <file>OthelloDisks/DarkDisk.jpg</file>
+        <file>OthelloDisks/WhiteDisk.jpg</file>
     </qresource>
 </RCC>

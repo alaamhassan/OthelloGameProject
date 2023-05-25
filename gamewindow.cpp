@@ -61,7 +61,10 @@ void GameWindow::RecievePlayerScoreUpdate(QStringList PlayerResponse)
     {
         ui->TurnLabel->setText(value);
     }
-
+    else if(ResponseTitle.compare("Player skip This Turn")==0)
+    {
+//messageBoxtoSkipTurn
+    }
     else  PlayerName =PlayerResponse[2].toInt();
 
     qDebug()<<"Update Player Score: "<<value;
@@ -94,6 +97,8 @@ void GameWindow::RecievePlayerScoreUpdate(QStringList PlayerResponse)
 
         //restart game
     }
+
+
 
 }
 void GameWindow::RecievePlayerRemindedPiecesUpdate(QStringList PlayerResponse)

@@ -12,14 +12,17 @@ public:
     //functions
     Player(QString name,int PlayerNumber, bool Maximizer);
 
-    void UpdateScore(int Score);
+    void UpdateScore(int score);
 
-    void UpdateRemindedPices(int RemindedPieces);
+    void UpdateRemindedPices();
 
     void setLostFlag(int isLost);
 
     void UpdatePlayerTurn();
 
+    void NoValidMovesThisTurn();
+
+    int IsPlayerMaximizer();
 signals:
     void SendPlayerSignal(QStringList );
 

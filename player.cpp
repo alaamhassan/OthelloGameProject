@@ -11,26 +11,26 @@ Player::Player(QString name,int PlayerNumber, bool Maximizer)
 
 }
 
-void Player::UpdateScore(int Score)
+void Player::UpdateScore(int score)
 {
 
 
     qDebug()<<"score is updated from player: "<<this->PlayerNumber;
 
-    this->Score=Score;
+    this->Score=score;
 
     emit SendPlayerSignal({"Update Player Score",QString::number(Score),QString::number(this->PlayerNumber)});
 
 }
 
-void Player::UpdateRemindedPices(int RemindedPices)
+void Player::UpdateRemindedPices()
 {
 
     qDebug()<<"Update Player Reminded Pieces: "<<this->PlayerNumber;
 
-    this->RemindedPieces=RemindedPices;
+    this->RemindedPieces--;
 
-    emit SendPlayerSignal({"Update Player Reminded Pieces",QString::number(RemindedPices),QString::number(this->PlayerNumber)});
+    emit SendPlayerSignal({"Update Player Reminded Pieces",QString::number(this->RemindedPieces),QString::number(this->PlayerNumber)});
 }
 
 void Player::setLostFlag(int isLost)
@@ -50,4 +50,14 @@ void Player::UpdatePlayerTurn()
 {
 
     emit SendPlayerSignal({"Update turn",this->name});
+}
+
+void Player::NoValidMovesThisTurn()
+{
+    emit SendPlayerSignal({"Player skip This Turn",this->name});
+}
+
+int Player::IsPlayerMaximizer()
+{
+    return Maximizer?Maximizer:-1;
 }

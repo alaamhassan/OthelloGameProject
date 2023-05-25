@@ -22,7 +22,7 @@ public:
     void DrawDisk();
 
     //setting variables
-    void setSquareValidMove();
+    void setSquareValidMove(bool isSquareValid);
     void setSquareState(int squareState);
 
     //initialize the square in case of restart
@@ -31,7 +31,11 @@ public:
     //set the color of the square
     void setSquareColor();
 
+    int getSquareState();
+
+
     //trigger events
+
 
    // Reimplement the mouse press event
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
@@ -42,7 +46,7 @@ private:
     int y_coordinate;
 
     //width and hight of the square
-    int width=80, hight=80;
+    int width=60, hight=60;
 
     //name that uniquly identify the square
     //the x,y of the square wiht respect to the board(36 squares)
@@ -51,21 +55,18 @@ private:
 
     //a varibale that represent the state of the square
     //if 0:empty, 1:black, -1:whtie
-    bool SqaureState;
+    int SqaureState;
 
     //properities for triggering events
     bool pressed;
     bool isSquareValidMove;
 
-    //the color of the square
 
-    //player turn
-    int playerTurn;
     //the disk image
     QGraphicsPixmapItem *DiskImage;
 
 signals:
-    QString sendSignalsToTheGameBoard(QString, int);
+    QString sendSignalsToTheGameBoard(QString,QString);
 
 };
 
