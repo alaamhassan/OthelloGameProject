@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QMainWindow>
+
 #include "gamewindow.h"
 
 namespace Ui {
@@ -16,6 +17,9 @@ class ComputerVsComputerWindow : public QDialog
 public:
     explicit ComputerVsComputerWindow(QWidget *parent = nullptr);
     ~ComputerVsComputerWindow();
+
+
+
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -34,6 +38,8 @@ private slots:
 private:
     Ui::ComputerVsComputerWindow *ui;
     GameWindow* gameWindow;
+
+   // QStringList PlayerNamesList;
 };
 
 #endif // COMPUTERVSCOMPUTERWINDOW_H

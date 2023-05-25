@@ -1,11 +1,16 @@
 #ifndef GAMEBOARD_H
 #define GAMEBOARD_H
+
+#include "boardsquare.h"
+#include "getandsindresponsemiddleware.h"
+#include "player.h"
+
 #include <QPainter>
 #include <QGraphicsScene>
 #include<QDebug>
 #include <QString>
-#include "boardsquare.h"
-#include "getandsindresponsemiddleware.h"
+
+
 
 class GameBoard: public QObject
 {
@@ -17,8 +22,13 @@ public:
     void SetUpBoard();
     QGraphicsScene* GetBoardScene();
 
+    void setPlayerList(QObject * GameWindow,QString Player1Name, QString Player2Name);
+
+signals:
+    void sendturnSignalToGameWindow(QString PlayerTurn);
+
 public slots:
-    void GetResponseFromTheSquare(QStringList SquareResponse);
+    void GetResponseFromTheSquare(QString SquareResponse, int PlayerTurn);
 
 
 private:
@@ -39,6 +49,11 @@ private:
     BoardSquare * boardSqaure;
 
     GetAndSindResponseMiddleWare* middleWare;
+
+    Player* playerList[2];
+
+
+    int playerTurn=0;
 };
 
 #endif // GAMEBOARD_H

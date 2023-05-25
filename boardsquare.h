@@ -33,12 +33,8 @@ public:
 
     //trigger events
 
-   // void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    //void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-    // Reimplement the mouse press event
+   // Reimplement the mouse press event
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-protected:
-    //virtual void mousePressEvent(QGraphicsSceneMouseEvent *) override;
 
 private:
     //the coordinate of the sqaure
@@ -55,7 +51,7 @@ private:
 
     //a varibale that represent the state of the square
     //if 0:empty, 1:black, -1:whtie
-    int SqaureState=0;
+    bool SqaureState;
 
     //properities for triggering events
     bool pressed;
@@ -63,11 +59,13 @@ private:
 
     //the color of the square
 
+    //player turn
+    int playerTurn;
     //the disk image
     QGraphicsPixmapItem *DiskImage;
 
 signals:
-    QString sendSignalsToTheBoard(QStringList);
+    QString sendSignalsToTheGameBoard(QString, int);
 
 };
 

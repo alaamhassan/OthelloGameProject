@@ -2,14 +2,15 @@
 #define GAMEWINDOW_H
 
 #include "qgraphicsscene.h"
-//#include "boardsquare.h"
 #include "gameboard.h"
+#include "player.h"
+
 #include <QDialog>
 #include <QtCore>
 #include <QtGui>
 #include<QDebug>
-//#include <QMouseEvent>
-//#include <QGraphicsView>
+
+
 namespace Ui {
 class GameWindow;
 }
@@ -19,23 +20,30 @@ class GameWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit GameWindow(QWidget *parent = nullptr);
+    explicit GameWindow(QWidget *parent = nullptr,QString Player1Name="",QString Player2Name="");
     ~GameWindow();
+    void  setPlayerNamesList(QString Player1Name,QString Player2Name);
+    void InitializePlayerList(QObject * GameWindow);
 
-private slots:
-//    void mouseMoveEvent(QMouseEvent *event);
-   // void mousePressEvent(QGraphicsSceneMouseEvent *e) ;
+public slots:
+    void RecievePlayerScoreUpdate(QStringList);
+    void RecievePlayerRemindedPiecesUpdate(QStringList);
+    void RecievePlayerWinOrLostUpdate(QStringList);
 
-//protected:
-//    virtual void mousePressEvent(QMouseEvent *event) override;
+   // void RecievePlayerTurnFromGameBoard(QString Playerturn);
 
 private:
     Ui::GameWindow *ui;
+
     QGraphicsScene* GameScene;
     QGraphicsRectItem* GameBoardRectangle;
-    BoardSquare *boardSquare;
 
+    BoardSquare *boardSquare;
     GameBoard* gameBoard;
+  //  Player* playerList[2];
+
+    QStringList PlayerNamesList;
+
 };
 
 #endif // GAMEWINDOW_H

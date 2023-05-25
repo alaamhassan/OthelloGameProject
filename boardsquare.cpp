@@ -13,38 +13,37 @@ BoardSquare::BoardSquare(int x_coordinate,int y_coordinate,QString SquareName)//
     pressed =false;
     isSquareValidMove=false;
 
+    playerTurn=0;
+
     setRect(QRectF(x_coordinate,y_coordinate,width,hight));
+
+
     //set the image at the same scene of the square
     DiskImage=new QGraphicsPixmapItem();
     DiskImage->setParentItem(this);
-
-//    setFlag(ItemIsMovable);
-//    this ->setFlags(QGraphicsItem::ItemIsFocusable);
-//    this->setFocus();
-//    this->setFlags(QGraphicsItem::ItemIsSelectable);
-//    this ->setAcceptHoverEvents(true);
-    //this ->setAcceptedMouseButtons(Qt::LeftButton);
 }
-
-//QRectF BoardSquare::boundingRect() const
-//{
-//    return QRectF(x_coordinate,y_coordinate,width,hight);
-
-
-//}
 
 void BoardSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+
     QRectF rec=boundingRect().toRect();
     QBrush brush(Qt::blue);
 
     if(pressed)
     {
-        brush.setColor(Qt::red);
+        if(isSquareValidMove)this->DrawDisk();
+        else
+            brush.setColor(Qt::red);
+
     }
     else
     {
-        brush.setColor(Qt::green);
+        if(isSquareValidMove)brush.setColor(Qt::yellow);
+        else
+            brush.setColor("#006325");
     }
 
    painter->fillRect(rec,brush);
@@ -57,11 +56,14 @@ void BoardSquare::DrawDisk()
 {
     QString DiskImagePath;
 
-    if(SqaureState==1)DiskImagePath=":/BoardDisks/OthelloDisks/BlackOthelloDisk.png";
-    else if (SqaureState==-1)DiskImagePath=":/BoardDisks/OthelloDisks/WhiteOthelloDisk.png";
+    if(SqaureState==1)DiskImagePath=":/BoardDisks/OthelloDisks/BlackOthelloDisk-removebg-preview.jpg";//":/BoardDisks/OthelloDisks/BlackOthelloDisk.png";
+    else if (SqaureState==-1)DiskImagePath=":/BoardDisks/OthelloDisks/WhiteOthelloDisk-removebg-preview (1).jpg";//":/BoardDisks/OthelloDisks/WhiteOthelloDisk.png";
 
     DiskImage->setPixmap(DiskImagePath);
-    DiskImage->setPos(x_coordinate,y_coordinate);
+
+    //shiftTheImageToNotOverlabTheSquareBoundary
+    DiskImage->setPos(x_coordinate+1,y_coordinate+1);
+
     DiskImage->show();
 }
 
@@ -86,79 +88,25 @@ void BoardSquare::RestartSquareToInitial()
 
 }
 
-// When clicked, space name is sent to Display's slot
-void BoardSquare::mousePressEvent(QGraphicsSceneMouseEvent *ev){
-    if(ev->buttons() == Qt::LeftButton){
-    qDebug() << "You clicked " << SquareName;
-    }
-            pressed=true;
-            update();
-            QGraphicsItem::mousePressEvent(ev);
+
+void BoardSquare::mousePressEvent(QGraphicsSceneMouseEvent *ev)
+{
+
+
+
+    qDebug()<<"reach the press event";
+
+    //emit sendSignalsToTheGameBoard("Switch turns",playerTurn);
+
+    this->playerTurn= ((playerTurn+1)%2);
+
+    emit sendSignalsToTheGameBoard("Switch turns",playerTurn);
+
+    pressed=true;
+    update();
+
+   QGraphicsItem::mousePressEvent(ev);
+   //qDebug()<<response[0]<<" "<<response[1];
+
 }
 
-
-//    emit sendSignalsToTheBoard({"draw disk",SquareName});
-
-//void BoardSquare::mousePressEvent(QGraphicsSceneMouseEvent *event)
-//{
-
-//           pressed=true;
-//           update();
-
-
-//   qDebug()<<"reach the press event";
-//   if(isSquareValidMove)
-//   {
-//        //        response[0]="draw disk";
-//        //        response[1]=SquareName;
-
-//        emit sendSignalsToTheBoard({"draw disk",SquareName});
-//   }
-
-//   else
-//   {
-//        //        response[0]="light the square with red";
-//        //        response[1]=SquareName;
-
-//        emit sendSignalsToTheBoard({"light the square with red",SquareName});
-//   }
-
-//   QGraphicsItem::mousePressEvent(event);
-//   //qDebug()<<response[0]<<" "<<response[1];
-
-//}
-// emit sendSignalsToTheBoard("SqureIsPressed");
-
-//        pressed=true;
-//        update();
-//        QGraphicsItem::mousePressEvent(event);
-
-
-//void BoardSquare::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-//{
-//    //QStringList response;
-
-//    qDebug()<<"reach the realse event";
-//    if(isSquareValidMove)
-//    {
-////        response[0]="draw disk";
-////        response[1]=SquareName;
-
-//        emit sendSignalsToTheBoard({"draw disk",SquareName});
-//    }
-
-//    else
-//    {
-////        response[0]="light the square with red";
-////        response[1]=SquareName;
-
-//        emit sendSignalsToTheBoard({"light the square with red",SquareName});
-//    }
-
-//    //qDebug()<<response[0]<<" "<<response[1];
-
-//}
-
-//    pressed=false;
-//    update();
-//    QGraphicsItem::mousePressEvent(event);

@@ -9,5 +9,7 @@
     <qresource prefix="/BoardDisks">
         <file>OthelloDisks/BlackOthelloDisk.png</file>
         <file>OthelloDisks/WhiteOthelloDisk.png</file>
+        <file>OthelloDisks/BlackOthelloDisk-removebg-preview.jpg</file>
+        <file>OthelloDisks/WhiteOthelloDisk-removebg-preview (1).jpg</file>
     </qresource>
 </RCC>

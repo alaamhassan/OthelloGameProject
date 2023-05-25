@@ -15,7 +15,8 @@ SOURCES += \
     gamewindow.cpp \
     getandsindresponsemiddleware.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    player.cpp
 
 HEADERS += \
     boardsquare.h \
@@ -23,7 +24,8 @@ HEADERS += \
     gameboard.h \
     gamewindow.h \
     getandsindresponsemiddleware.h \
-    mainwindow.h
+    mainwindow.h \
+    player.h
 
 FORMS += \
     computervscomputerwindow.ui \

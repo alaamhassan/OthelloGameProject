@@ -140,9 +140,13 @@ void ComputerVsComputerWindow::on_backButton_clicked()
 void ComputerVsComputerWindow::on_nextButton_clicked()
 {
 
-    gameWindow =new GameWindow(this);
+    gameWindow =new GameWindow(this,"Player","Computer");
+
+ //   gameWindow->setPlayerNamesList("Player","Computer");
+
     gameWindow->show();
     hide();
+
 
 }
 
@@ -153,6 +157,10 @@ void ComputerVsComputerWindow::on_MinMaxButton_clicked()
    ui->MinMaxButton->setStyleSheet(styleSheetForClickedButton);
    ui->BetaAlphaButton->setStyleSheet(styleSheetForUnClickedButton);
    ui->BettaAlphaIterativeButton->setStyleSheet(styleSheetForUnClickedButton);
+
+   gameWindow =new GameWindow(this,"Player","Computer");
+   //gameWindow->setPlayerNamesList("Player","Computer");
+
 }
 
 void ComputerVsComputerWindow::on_BetaAlphaButton_clicked()
@@ -160,6 +168,10 @@ void ComputerVsComputerWindow::on_BetaAlphaButton_clicked()
    ui->MinMaxButton->setStyleSheet(styleSheetForUnClickedButton);
    ui->BetaAlphaButton->setStyleSheet(styleSheetForClickedButton);
    ui->BettaAlphaIterativeButton->setStyleSheet(styleSheetForUnClickedButton);
+
+  gameWindow =new GameWindow(this,"Player","Computer");
+ //  gameWindow->setPlayerNamesList("Computer1","Computer2");
+
 }
 
 
@@ -168,5 +180,9 @@ void ComputerVsComputerWindow::on_BettaAlphaIterativeButton_clicked()
    ui->MinMaxButton->setStyleSheet(styleSheetForUnClickedButton);
    ui->BetaAlphaButton->setStyleSheet(styleSheetForUnClickedButton);
    ui->BettaAlphaIterativeButton->setStyleSheet(styleSheetForClickedButton);
+
+   gameWindow =new GameWindow(this,"Player","Computer");
+  // gameWindow->setPlayerNamesList("Player","Computer");
+
 }
 
