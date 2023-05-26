@@ -2,13 +2,13 @@
 #define GAMEBOARD_H
 
 #include "boardsquare.h"
-
-
 #include "player.h"
+
+
 
 #include <QPainter>
 #include <QGraphicsScene>
-#include<QDebug>
+#include <QDebug>
 #include <QString>
 
 
@@ -60,6 +60,8 @@ private:
             {"48","49","50","51","52","53","54","55"},
             {"56","57","58","59","60","61","62","63"}
         };
+
+
 
 
 

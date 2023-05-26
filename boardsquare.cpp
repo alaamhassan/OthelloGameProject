@@ -35,7 +35,7 @@ void BoardSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     QRectF rec=boundingRect().toRect();
     QBrush brush("#006325");
 
-    bool ChangeColorFlag=0;
+
 
     if(pressed)
     {
@@ -52,19 +52,16 @@ void BoardSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 
 
-            // Create a timer and set its interval to 3 seconds
-            QTimer timer;
-            timer.setInterval(500);
+//            // Create a timer and set its interval to 3 seconds
+//            QTimer timer;
+//            timer.setInterval(500);
+//            // Connect the timer's timeout signal to a slot that changes the color back
+//            connect(&timer, &QTimer::timeout, this,&BoardSquare::ChangeInvalidSquareColor);
 
-            // Connect the timer's timeout signal to a slot that changes the color back
-            connect(&timer, &QTimer::timeout, [&brush]() {
-                brush.setColor("#006325"); // or any other color you want
-            });
+//            // Start the timer
+//            timer.start();
 
-            // Start the timer
-            timer.start();
 
-            ChangeColorFlag=1;
 
         }
 
@@ -79,7 +76,7 @@ void BoardSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
    painter->fillRect(rec,brush);
    painter->drawRect(rec);
 
-   if(ChangeColorFlag) ChangeInvalidSquareColor(painter);
+
 }
 
 
@@ -154,13 +151,11 @@ void BoardSquare::mousePressEvent(QGraphicsSceneMouseEvent *ev)
 
 }
 
-void BoardSquare::ChangeInvalidSquareColor(QPainter *painter)
+void BoardSquare::ChangeInvalidSquareColor()
 {
-   QRectF rec=boundingRect().toRect();
-   QBrush brush("#006325");
+    brush.setColor("#006325");
 
-   painter->fillRect(rec,brush);
-   painter->drawRect(rec);
+   update();
 
 }
 

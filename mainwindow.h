@@ -22,7 +22,7 @@ protected:
     void resizeEvent(QResizeEvent *event);
 
 private slots:
-    void on_MinMaxButton_clicked();
+    //void on_MinMaxButton_clicked();
 
     void on_AlphaBeta_clicked();
 

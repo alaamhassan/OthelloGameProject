@@ -5,6 +5,13 @@
     <qresource prefix="/homePage">
         <file>HomePage/homePageImage.png</file>
         <file>HomePage/background2.png</file>
+        <file>HomePage/1.png</file>
+        <file>HomePage/2.png</file>
+        <file>HomePage/3.png</file>
+        <file>HomePage/chooseLevel.png</file>
+        <file>HomePage/chooseMode.png</file>
+        <file>HomePage/gameWindow.png</file>
+        <file>HomePage/GAMEWINDOW (2).png</file>
     </qresource>
     <qresource prefix="/BoardDisks">
         <file>OthelloDisks/DarkDisk.jpg</file>

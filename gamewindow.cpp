@@ -53,7 +53,7 @@ GameWindow::~GameWindow()
 
 void GameWindow::resizeEvent(QResizeEvent *event)
 {
-    QPixmap bkgnd(":/homePage/HomePage/background2.png");
+    QPixmap bkgnd(":/homePage/HomePage/GAMEWINDOW (2).png");
     bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
     QPalette p = palette();
     p.setBrush(QPalette::Window, bkgnd);

@@ -29,15 +29,15 @@ ComputerVsComputerWindow::ComputerVsComputerWindow(QWidget *parent) :
     QString styleSheet=
         "QPushButton{"
         "font-size:30px;"
-//        "background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(4, 137, 26, 255), stop:1 rgba(255, 255, 255, 255)); "
         "border-radius:7px;"
-        "border:1px solid grey;"
+        "border: 3px solid #1E3706;"
+        "border-color:#1E3706;"
 
-         "background-color: rgb(255,255,230);"
-         "color:rgb(0, 63, 0);"
+        "background-color:#F1F1F1;"
+        "color:#1E3706;"
         "}"
         "QPushButton:hover{"
-        "background-color: rgb(0, 63, 0);"
+        "background-color:rgb(0, 63, 0);"
         "color:rgb(255,255,230);"
         "}"
 
@@ -75,24 +75,23 @@ ComputerVsComputerWindow::ComputerVsComputerWindow(QWidget *parent) :
     QString BackAndStartStyleSheet=
         "QPushButton{"
         "font-size:30px;"
-        "background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(4, 137, 26, 255), stop:1 rgba(255, 255, 255, 255)); "
         "border-radius:7px;"
-        "border:1px solid grey;"
+        "border: 3px solid #1E3706;"
+        "border-color:#1E3706;"
 
-       // "background-color: rgb(255,255,230);"
-        "color:rgb(0, 63, 0);"
+        "background-color:#90978E;"
+        "color:#1E3706;"
         "}"
-        "QPushButton:hover{"
-        "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 73, 0, 255), stop:1 rgba(255, 255, 255, 255));"
-        "color:rgb(255,255,230);"
-        "}"
+//        "QPushButton:hover{"
+//        "background-color:rgb(0, 63, 0);"
+//        "color:rgb(255,255,230);"
+//        "}"
 
-        "QPushButton:pressed{"
-        "background-color: rgb(0, 63, 0);"
-        "color:rgb(255,255,230);"
-        "}"
+//        "QPushButton:pressed{"
+//        "background-color: rgb(0, 63, 0);"
+//        "color:rgb(255,255,230);"
+//        "}"
         ;
-
     ui->backButton->setStyleSheet(BackAndStartStyleSheet);
     ui->nextButton->setStyleSheet(BackAndStartStyleSheet);
 
@@ -114,7 +113,7 @@ ComputerVsComputerWindow::ComputerVsComputerWindow(QWidget *parent) :
 
 void ComputerVsComputerWindow::resizeEvent(QResizeEvent *event)
 {
-    QPixmap bkgnd(":/backGroundImages/HomePage/bluredImage.jpg");
+    QPixmap bkgnd(":/homePage/HomePage/chooseMode.png");
     bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
     QPalette p = palette();
     p.setBrush(QPalette::Window, bkgnd);
@@ -142,9 +141,7 @@ void ComputerVsComputerWindow::on_nextButton_clicked()
 
     gameWindow =new GameWindow(this,"Player","Computer");
 
- //   gameWindow->setPlayerNamesList("Player","Computer");
-
-    gameWindow->show();
+   gameWindow->show();
     hide();
 
 
@@ -154,35 +151,47 @@ void ComputerVsComputerWindow::on_nextButton_clicked()
 void ComputerVsComputerWindow::on_MinMaxButton_clicked()
 {
 
-   ui->MinMaxButton->setStyleSheet(styleSheetForClickedButton);
-   ui->BetaAlphaButton->setStyleSheet(styleSheetForUnClickedButton);
-   ui->BettaAlphaIterativeButton->setStyleSheet(styleSheetForUnClickedButton);
+//   ui->MinMaxButton->setStyleSheet(styleSheetForClickedButton);
+//   ui->BetaAlphaButton->setStyleSheet(styleSheetForUnClickedButton);
+//   ui->BettaAlphaIterativeButton->setStyleSheet(styleSheetForUnClickedButton);
 
-   gameWindow =new GameWindow(this,"Player","Computer");
+
+
+gameWindow =new GameWindow(this,"Player1","Player2");
+   gameWindow->show();
+   hide();
+
    //gameWindow->setPlayerNamesList("Player","Computer");
 
 }
 
 void ComputerVsComputerWindow::on_BetaAlphaButton_clicked()
 {
-   ui->MinMaxButton->setStyleSheet(styleSheetForUnClickedButton);
-   ui->BetaAlphaButton->setStyleSheet(styleSheetForClickedButton);
-   ui->BettaAlphaIterativeButton->setStyleSheet(styleSheetForUnClickedButton);
+//   ui->MinMaxButton->setStyleSheet(styleSheetForUnClickedButton);
+//   ui->BetaAlphaButton->setStyleSheet(styleSheetForClickedButton);
+//   ui->BettaAlphaIterativeButton->setStyleSheet(styleSheetForUnClickedButton);
 
-  gameWindow =new GameWindow(this,"Player","Computer");
- //  gameWindow->setPlayerNamesList("Computer1","Computer2");
+   gameWindow =new GameWindow(this,"Player","Computer");
+
+   gameWindow->show();
+   hide();
+
+
 
 }
 
 
 void ComputerVsComputerWindow::on_BettaAlphaIterativeButton_clicked()
 {
-   ui->MinMaxButton->setStyleSheet(styleSheetForUnClickedButton);
-   ui->BetaAlphaButton->setStyleSheet(styleSheetForUnClickedButton);
-   ui->BettaAlphaIterativeButton->setStyleSheet(styleSheetForClickedButton);
+//   ui->MinMaxButton->setStyleSheet(styleSheetForUnClickedButton);
+//   ui->BetaAlphaButton->setStyleSheet(styleSheetForUnClickedButton);
+//   ui->BettaAlphaIterativeButton->setStyleSheet(styleSheetForClickedButton);
 
-   gameWindow =new GameWindow(this,"Player","Computer");
-  // gameWindow->setPlayerNamesList("Player","Computer");
+   gameWindow =new GameWindow(this,"Computer1","Computer2");
+   gameWindow->show();
+   hide();
+
+
 
 }
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1286</width>
-    <height>683</height>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,9 +16,9 @@
   <widget class="QGraphicsView" name="graphicsView">
    <property name="geometry">
     <rect>
-     <x>340</x>
-     <y>140</y>
-     <width>581</width>
+     <x>380</x>
+     <y>150</y>
+     <width>501</width>
      <height>491</height>
     </rect>
    </property>
@@ -26,8 +26,8 @@
   <widget class="QLabel" name="player1RemindedPieces">
    <property name="geometry">
     <rect>
-     <x>1060</x>
-     <y>210</y>
+     <x>1050</x>
+     <y>320</y>
      <width>63</width>
      <height>20</height>
     </rect>
@@ -39,8 +39,8 @@
   <widget class="QLabel" name="player2RemindedPieces">
    <property name="geometry">
     <rect>
-     <x>1060</x>
-     <y>300</y>
+     <x>1050</x>
+     <y>460</y>
      <width>63</width>
      <height>20</height>
     </rect>
@@ -53,7 +53,7 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>220</y>
+     <y>320</y>
      <width>63</width>
      <height>20</height>
     </rect>
@@ -66,7 +66,7 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>340</y>
+     <y>480</y>
      <width>63</width>
      <height>20</height>
     </rect>
@@ -79,7 +79,7 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>160</y>
+     <y>240</y>
      <width>63</width>
      <height>20</height>
     </rect>
@@ -92,7 +92,7 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>280</y>
+     <y>400</y>
      <width>63</width>
      <height>20</height>
     </rect>
@@ -104,8 +104,8 @@
   <widget class="QLabel" name="Player1R">
    <property name="geometry">
     <rect>
-     <x>1060</x>
-     <y>180</y>
+     <x>1050</x>
+     <y>260</y>
      <width>63</width>
      <height>20</height>
     </rect>
@@ -117,8 +117,8 @@
   <widget class="QLabel" name="Player2R">
    <property name="geometry">
     <rect>
-     <x>1060</x>
-     <y>250</y>
+     <x>1050</x>
+     <y>390</y>
      <width>63</width>
      <height>20</height>
     </rect>
@@ -130,21 +130,21 @@
   <widget class="QLabel" name="TurnLabel">
    <property name="geometry">
     <rect>
-     <x>580</x>
-     <y>110</y>
+     <x>610</x>
+     <y>120</y>
      <width>63</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>TURN</string>
    </property>
   </widget>
   <widget class="QPushButton" name="RestartButton">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>640</y>
+     <x>400</x>
+     <y>660</y>
      <width>451</width>
      <height>29</height>
     </rect>
@@ -157,7 +157,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>618</y>
+     <y>640</y>
      <width>111</width>
      <height>41</height>
     </rect>

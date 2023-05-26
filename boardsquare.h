@@ -37,11 +37,7 @@ public:
     int getSquareState();
 
 
-
-    //trigger events
-
-
-   // Reimplement the mouse press event
+   //trigger events
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 
 private:
@@ -69,8 +65,10 @@ private:
     //the disk image
     QGraphicsPixmapItem *DiskImage;
 
-    void ChangeInvalidSquareColor(QPainter *painter);
+    QBrush brush;
 
+private slots:
+    void ChangeInvalidSquareColor();
 signals:
     QString sendSignalsToTheGameBoard(QString,QString);
 

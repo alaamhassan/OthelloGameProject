@@ -10,16 +10,16 @@ MainWindow::MainWindow(QWidget *parent)
      QString styleSheet=
        "QPushButton{"
                          "font-size:30px;"
-                         //        "background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(4, 137, 26, 255), stop:1 rgba(255, 255, 255, 255)); "
                          "border-radius:7px;"
-                         "border:3px #1E3706;"
+                         "border: 3px solid #1E3706;"
+                         "border-color:#1E3706;"
 
-                         "background-color:#F1F1F1;"//rgb(255,255,230);"  //rgb(255,255,230);"
-                         "color:#1E3706;"//rgb(0, 63, 0);"
+                         "background-color:#F1F1F1;"
+                         "color:#1E3706;"
       "}"
         "QPushButton:hover{"
-                          "background-color:rgb(0, 63, 0);"// rgb(0, 63, 0);"
-                         "color:rgb(255,255,230);"//rgb(255,255,230);"
+                          "background-color:rgb(0, 63, 0);"
+                         "color:rgb(255,255,230);"
                          "}"
 
         "QPushButton:pressed{"
@@ -29,8 +29,8 @@ MainWindow::MainWindow(QWidget *parent)
     ;
 
 
-    ui->MinMaxButton->setStyleSheet(styleSheet);
-    ui->AlphaBetaIterative->setStyleSheet(styleSheet);
+   // ui->MinMaxButton->setStyleSheet(styleSheet);
+   // ui->AlphaBetaIterative->setStyleSheet(styleSheet);
     ui->AlphaBeta->setStyleSheet(styleSheet);
     QString lebelStyleSheet=  "background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(4, 137, 26, 255), stop:1 rgba(255, 255, 255, 255));"
                               "color:rgb(0, 63, 0);"
@@ -63,16 +63,16 @@ MainWindow::~MainWindow()
 
 
 
-void MainWindow::on_MinMaxButton_clicked()
-{
-    computerVsComputerWindow =new ComputerVsComputerWindow(this);
+//void MainWindow::on_MinMaxButton_clicked()
+//{
+//    computerVsComputerWindow =new ComputerVsComputerWindow(this);
 
-    computerVsComputerWindow->show();
+//    computerVsComputerWindow->show();
 
-    hide();
+//    hide();
 
 
-}
+//}
 
 
 void MainWindow::on_AlphaBeta_clicked()
