@@ -14,7 +14,6 @@ SOURCES += \
     computervscomputerwindow.cpp \
     gameboard.cpp \
     gamewindow.cpp \
-    getandsindresponsemiddleware.cpp \
     main.cpp \
     mainwindow.cpp \
     player.cpp
@@ -25,7 +24,6 @@ HEADERS += \
     computervscomputerwindow.h \
     gameboard.h \
     gamewindow.h \
-    getandsindresponsemiddleware.h \
     mainwindow.h \
     player.h
 

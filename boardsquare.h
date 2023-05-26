@@ -21,6 +21,9 @@ public:
     //draw disk on the square
     void DrawDisk();
 
+    //hidetheImage
+    void hideDisk();
+
     //setting variables
     void setSquareValidMove(bool isSquareValid);
     void setSquareState(int squareState);
@@ -32,6 +35,7 @@ public:
     void setSquareColor();
 
     int getSquareState();
+
 
 
     //trigger events
@@ -64,6 +68,8 @@ private:
 
     //the disk image
     QGraphicsPixmapItem *DiskImage;
+
+    void ChangeInvalidSquareColor(QPainter *painter);
 
 signals:
     QString sendSignalsToTheGameBoard(QString,QString);

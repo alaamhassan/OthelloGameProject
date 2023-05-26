@@ -1,7 +1,12 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
+#include "computervscomputerwindow.h"
+
 #include <QGraphicsView>
 #include<QDebug>
+#include<QMessageBox>
+
+ComputerVsComputerWindow *optionsWindow;
 
 GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name) :
     QDialog(parent),
@@ -17,7 +22,9 @@ GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name
     ui->graphicsView->setScene(gameBoard->GetBoardScene());
 
     ui->graphicsView->setMouseTracking(true);
+
     setMouseTracking(true);
+
     qDebug()<<"mouse:"<<(ui->graphicsView->hasMouseTracking());
 
     ui->graphicsView->show();
@@ -26,16 +33,32 @@ GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name
     ui->TurnLabel->setText(Player1Name);
 
     ui->Player1->setText(Player1Name);
+    ui->Player1Score->setText("2");
+
     ui->Player1R->setText(Player1Name);
+    ui->player1RemindedPieces->setText("30");
 
     ui->Player2->setText(Player2Name);
+    ui->Player2Score->setText("2");
     ui->Player2R->setText(Player2Name);
+    ui->player2RemindedPieces->setText("30");
+
 }
 
 
 GameWindow::~GameWindow()
 {
     delete ui;
+}
+
+void GameWindow::resizeEvent(QResizeEvent *event)
+{
+    QPixmap bkgnd(":/homePage/HomePage/background2.png");
+    bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
+    QPalette p = palette();
+    p.setBrush(QPalette::Window, bkgnd);
+    setPalette(p);
+    QDialog::resizeEvent(event);
 }
 
 void GameWindow::setPlayerNamesList(QString Player1Name, QString Player2Name)
@@ -46,6 +69,10 @@ void GameWindow::setPlayerNamesList(QString Player1Name, QString Player2Name)
 
 void GameWindow::InitializePlayerList(QObject * GameWindow)
 {
+    if(isRestart)
+    {
+        int a=1;
+    }
     gameBoard->setPlayerList(GameWindow,PlayerNamesList[0],PlayerNamesList[1]);
 }
 
@@ -138,4 +165,44 @@ void GameWindow::RecievePlayerWinOrLostUpdate(QStringList PlayerResponse)
     }
 }
 
+
+
+void GameWindow::on_RestartButton_clicked()
+{
+    QMessageBox::StandardButton replay =QMessageBox::question(this,"Restart"
+                          ,"Are you sure you want to restart the game?",
+                          QMessageBox::Yes|QMessageBox::No);
+
+    if(replay==QMessageBox::Yes)
+    {
+        gameBoard =new GameBoard();
+        InitializePlayerList(this);
+        ui->graphicsView->setScene(gameBoard->GetBoardScene());
+
+
+        ui->Player1Score->setText("2");
+        ui->player1RemindedPieces->setText("30");
+        ui->Player2Score->setText("2");
+        ui->player2RemindedPieces->setText("30");
+
+    }
+
+}
+
+
+void GameWindow::on_backButton_clicked()
+{
+    QMessageBox::StandardButton replay =QMessageBox::question(this,"Back"
+                                                               ,"You will lose your progress if you clicked back!",
+                                                               QMessageBox::Yes|QMessageBox::No);
+
+    if(replay==QMessageBox::Yes)
+    {
+        optionsWindow =new ComputerVsComputerWindow(this);
+        optionsWindow->show();
+        hide();
+
+    }
+
+}
 

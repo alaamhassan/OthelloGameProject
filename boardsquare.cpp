@@ -35,6 +35,8 @@ void BoardSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     QRectF rec=boundingRect().toRect();
     QBrush brush("#006325");
 
+    bool ChangeColorFlag=0;
+
     if(pressed)
     {
         if(isSquareValidMove)
@@ -44,9 +46,11 @@ void BoardSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
             this->setSquareValidMove(0);
 
         }
-        else
+        else if(this->getSquareState()==0)
         {
             brush.setColor("#D92D20");//Qt::red
+
+
 
             // Create a timer and set its interval to 3 seconds
             QTimer timer;
@@ -59,18 +63,23 @@ void BoardSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
             // Start the timer
             timer.start();
+
+            ChangeColorFlag=1;
+
         }
 
     }
     else
     {
-        if(isSquareValidMove)brush.setColor("#F79009");//Qt::yellow
-        else
+        if(isSquareValidMove)this->DrawDisk();//brush.setColor("#F79009");//Qt::yellow
+        else if(this->getSquareState()==0)
             brush.setColor("#006325");
     }
 
    painter->fillRect(rec,brush);
    painter->drawRect(rec);
+
+   if(ChangeColorFlag) ChangeInvalidSquareColor(painter);
 }
 
 
@@ -81,6 +90,7 @@ void BoardSquare::DrawDisk()
 
    if(SqaureState==1)DiskImagePath=":/BoardDisks/OthelloDisks/DarkDisk.jpg";
    else if (SqaureState==-1)DiskImagePath=":/BoardDisks/OthelloDisks/WhiteDisk.jpg";
+   else DiskImagePath=":/BoardDisks/OthelloDisks/validDisk2.jpg";
 
     DiskImage->setPixmap(DiskImagePath);
 
@@ -88,6 +98,11 @@ void BoardSquare::DrawDisk()
     DiskImage->setPos(x_coordinate+1,y_coordinate+1);
 
     DiskImage->show();
+}
+
+void BoardSquare::hideDisk()
+{
+    DiskImage->hide();
 }
 
 void BoardSquare::setSquareValidMove(bool isSquareValid)
@@ -138,4 +153,15 @@ void BoardSquare::mousePressEvent(QGraphicsSceneMouseEvent *ev)
 
 
 }
+
+void BoardSquare::ChangeInvalidSquareColor(QPainter *painter)
+{
+   QRectF rec=boundingRect().toRect();
+   QBrush brush("#006325");
+
+   painter->fillRect(rec,brush);
+   painter->drawRect(rec);
+
+}
+
 

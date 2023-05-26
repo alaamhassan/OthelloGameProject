@@ -2,11 +2,18 @@
 
 #include"GameDispalyCalculation.h"
 
-//  QObject::connect(middleWare,&GetAndSindResponseMiddleWare::sendRespnoseToGameBoard,this,&GameBoard::GetResponseFromTheSquare);
-GameBoard::GameBoard()//QObject* gameWindow
+
+GameBoard::GameBoard()
 {
 
-    BoardScene =new QGraphicsScene();//gameWindow
+    BoardScene =new QGraphicsScene();
+
+    playerTurn=0;
+    BoardSqaureList={};
+
+    playerList[0]={};
+    playerList[1]={};
+
     SetUpBoard();
 
     InitializeBoardForTesting();
@@ -30,14 +37,15 @@ void GameBoard::SetUpBoard()
 
             BoardScene->addItem(square);
 
-          bool success=  QObject::connect(square,SIGNAL(sendSignalsToTheGameBoard(QString,QString)),this,SLOT(GetResponseFromTheSquare(QString,QString)));
+            bool success=  QObject::connect(square,SIGNAL(sendSignalsToTheGameBoard(QString,QString)),this,SLOT(GetResponseFromTheSquare(QString,QString)));
             Q_ASSERT(success);
 
           if((row ==3||row==4)&&(column==3||column==4) )
             {
-                if((row ==3&&column==4)||(row ==4&&column==3))
-                square->setSquareState(1);
+                if((row ==3&&column==4)||(row ==4&&column==3))square->setSquareState(1);
+
                 else square->setSquareState(-1);
+
                 square->DrawDisk();
 
           }
@@ -74,7 +82,7 @@ void GameBoard::InitializeBoardForTesting()
 {
     for(int i=0;i<BoardSqaureList.size();i++)
     {
-        if(i%2==0)
+        if(i%2==0 &&(!BoardSqaureList[i]->getSquareState()) )
         {
             BoardSqaureList[i]->setSquareValidMove(1);
 
@@ -82,6 +90,27 @@ void GameBoard::InitializeBoardForTesting()
     }
 
 }
+
+void GameBoard::restartBoard()
+{
+
+
+    for(int i=0;i<BoardSqaureList.size();i++)
+    {
+        BoardSqaureList[i]->hideDisk();
+//        if(BoardSqaureList[i]->getSquareState()!=0)
+//        {
+//            BoardSqaureList[i]->hideDisk();
+//            BoardSqaureList[i]->setSquareState(0);
+//        }
+    }
+
+
+
+   // playerList={};
+
+}
+
 
 
 void GameBoard::GetResponseFromTheSquare(QString SquareResponse,QString squareName)

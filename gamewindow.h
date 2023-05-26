@@ -3,7 +3,6 @@
 
 #include "qgraphicsscene.h"
 #include "gameboard.h"
-#include "player.h"
 
 #include <QDialog>
 #include <QtCore>
@@ -30,7 +29,12 @@ public slots:
     void RecievePlayerRemindedPiecesUpdate(QStringList);
     void RecievePlayerWinOrLostUpdate(QStringList);
 
-   // void RecievePlayerTurnFromGameBoard(QString Playerturn);
+protected:
+    void resizeEvent(QResizeEvent *event) override;
+
+private slots:
+    void on_RestartButton_clicked();
+    void on_backButton_clicked();
 
 private:
     Ui::GameWindow *ui;
@@ -40,9 +44,11 @@ private:
 
     BoardSquare *boardSquare;
     GameBoard* gameBoard;
-  //  Player* playerList[2];
+
 
     QStringList PlayerNamesList;
+
+    bool isRestart=0;
 
 };
 

@@ -19,8 +19,6 @@ public:
     ~ComputerVsComputerWindow();
 
 
-
-
 protected:
     void resizeEvent(QResizeEvent *event) override;
 
