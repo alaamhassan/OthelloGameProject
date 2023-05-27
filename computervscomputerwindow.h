@@ -2,8 +2,6 @@
 #define COMPUTERVSCOMPUTERWINDOW_H
 
 #include <QDialog>
-#include <QMainWindow>
-
 #include "gamewindow.h"
 
 namespace Ui {
@@ -18,26 +16,17 @@ public:
     explicit ComputerVsComputerWindow(QWidget *parent = nullptr);
     ~ComputerVsComputerWindow();
 
-
 protected:
-    void resizeEvent(QResizeEvent *event) override;
+    void resizeEvent(QResizeEvent *event);
 
 private slots:
     void on_backButton_clicked();
 
     void on_nextButton_clicked();
 
-    void on_MinMaxButton_clicked();
-
-    void on_BetaAlphaButton_clicked();
-
-    void on_BettaAlphaIterativeButton_clicked();
-
 private:
     Ui::ComputerVsComputerWindow *ui;
     GameWindow* gameWindow;
-
-   // QStringList PlayerNamesList;
 };
 
 #endif // COMPUTERVSCOMPUTERWINDOW_H

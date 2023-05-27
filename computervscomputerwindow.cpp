@@ -1,124 +1,77 @@
 #include "computervscomputerwindow.h"
 #include "ui_computervscomputerwindow.h"
-#include "mainwindow.h"
+#include "ModesWindow.h"
 
-MainWindow *mainWindow;
-QString styleSheetForClickedButton="QPushButton{"
-                                     "font-size:30px;"
-                                     "border-radius:7px;"
-                                     "border:1px solid grey;"
-                                     "background-color: rgb(0, 63, 0);"
-                                     "color:rgb(255,255,230);"
-                                     "}";
-QString styleSheetForUnClickedButton="QPushButton{"
-                                    "font-size:30px;"
-                                    "border-radius:7px;"
-                                    "border:1px solid grey;"
-                                      "background-color: rgb(255,255,230);"
-                                       "color:rgb(0, 63, 0);"
-                                     "}";
+
+ModesWindow* modesWindow;
+
+
 ComputerVsComputerWindow::ComputerVsComputerWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ComputerVsComputerWindow)
 {
-    ui->setupUi(this);
 
-    QStringList levelLists={"Level 1","Level 2","Level 3","Level 4","Level 5"};
-    ui->comboBox->addItems(levelLists);
 
-    QString styleSheet=
-        "QPushButton{"
-        "font-size:30px;"
-        "border-radius:7px;"
-        "border: 3px solid #1E3706;"
+    QStringList ComputerLevels ={"Level 1","Level 2","Level 3", "Level 4", "Level 5",
+                                  "Level 6","Level 7","Level 8", "Level 9", "Level 10"};
+
+    QString LevelListStyleSheet=
+        "QListView"
+        "{"
+        "border-radius:2px;"
+        "border:2px solid #1E3706;"
         "border-color:#1E3706;"
-
+        "background: #F1F1F1;"
+        "}"
+        " QListView QScrollBar"
+        " {"
+        " QListView : solid #1E3706;"
+        "width:15px;"
+        " }"
+        "QListView:item"
+        "{"
+        "border:1px solid #1E3706;"
         "background-color:#F1F1F1;"
         "color:#1E3706;"
         "}"
-        "QPushButton:hover{"
-        "background-color:rgb(0, 63, 0);"
-        "color:rgb(255,255,230);"
+        "QListView:item:hover"
+        "{"
+        "border:1px solid #1E3706;"
+        "background-color:#1E3706;"
+        "color:#F1F1F1;"
         "}"
-
-        "QPushButton:pressed{"
-        "background-color: rgb(0, 63, 0);"
-        "color:rgb(255,255,230);"
+        "QListView:item:selected"
+        "{"
+        "border:1px solid #1E3706;"
+        "background-color:#1E3706;"
+        "color:#F1F1F1;"
         "}"
         ;
-
-    ui->MinMaxButton->setStyleSheet(styleSheet);
-    ui->BetaAlphaButton->setStyleSheet(styleSheet);
-    ui->BettaAlphaIterativeButton->setStyleSheet(styleSheet);
-
-
-    QString QcomboBoxStyleSheet=
-        "QComboBox:hover{"
-         "selectedTextColor : rgb(255,255,230);"
-       "selectionColor : rgb(0, 63, 0);"
-        "}"
-
-        "QComboBox:pressed{"
-        "background-color: rgb(0, 63, 0);"
-        "color:rgb(255,255,230);"
-        "}"
-
-        "background-color: rgb(255,255,230);"
-        "dropDownButtonWidth : 30px;"
-        "font : 20px;"
-        "selectedTextColor : rgb(255,255,230);"
-        "selectionColor : rgb(0, 63, 0);"
-        "textColor : rgb(0, 63, 0);";
-
-    ui->comboBox->setStyleSheet(QcomboBoxStyleSheet);
 
     QString BackAndStartStyleSheet=
         "QPushButton{"
         "font-size:30px;"
-        "border-radius:7px;"
-        "border: 3px solid #1E3706;"
+        "border-radius:38px;"
+        "border: 1px solid #1E3706;"
         "border-color:#1E3706;"
 
         "background-color:#90978E;"
         "color:#1E3706;"
         "}"
-//        "QPushButton:hover{"
-//        "background-color:rgb(0, 63, 0);"
-//        "color:rgb(255,255,230);"
-//        "}"
-
-//        "QPushButton:pressed{"
-//        "background-color: rgb(0, 63, 0);"
-//        "color:rgb(255,255,230);"
-//        "}"
         ;
+
+    ui->setupUi(this);
+
+
+    ui->computer1LevelList->addItems(ComputerLevels);
+    ui->computer1LevelList->setStyleSheet(LevelListStyleSheet);
+
+    ui->computer2LevelList->addItems(ComputerLevels);
+    ui->computer2LevelList->setStyleSheet(LevelListStyleSheet);
+
     ui->backButton->setStyleSheet(BackAndStartStyleSheet);
     ui->nextButton->setStyleSheet(BackAndStartStyleSheet);
 
-    QString lebelStyleSheet=  "background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(4, 137, 26, 255), stop:1 rgba(255, 255, 255, 255));"
-                              "color:rgb(0, 63, 0);"
-                              "border-radius:5px;"
-                              "border:1px black;"
-                              "margin-top:10px;"
-                              "margin-bottom:5px;"
-                              "font-size:20px;";
-
-    ui->label->setStyleSheet(lebelStyleSheet);
-    ui->label->setAlignment(Qt::AlignCenter);
-
-    ui->label_2->setStyleSheet(lebelStyleSheet);
-    ui->label_2->setAlignment(Qt::AlignCenter);
-
-}
-
-void ComputerVsComputerWindow::resizeEvent(QResizeEvent *event)
-{
-    QPixmap bkgnd(":/homePage/HomePage/chooseMode.png");
-    bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
-    QPalette p = palette();
-    p.setBrush(QPalette::Window, bkgnd);
-    setPalette(p);
-    QDialog::resizeEvent(event);
 }
 
 ComputerVsComputerWindow::~ComputerVsComputerWindow()
@@ -126,71 +79,31 @@ ComputerVsComputerWindow::~ComputerVsComputerWindow()
     delete ui;
 }
 
+void ComputerVsComputerWindow::resizeEvent(QResizeEvent *event)
+{
+    QPixmap bkgnd(":/computerVScomputerPage/computerVsComputerPage/computerVSComputer.png");
+    bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
+    QPalette p = palette();
+    p.setBrush(QPalette::Window, bkgnd);
+    setPalette(p);
+    QDialog::resizeEvent(event);
+}
 
 void ComputerVsComputerWindow::on_backButton_clicked()
 {
-    mainWindow =new MainWindow(this);
-    mainWindow->show();
+    modesWindow=new ModesWindow();
+    modesWindow->show();
     hide();
-
 }
 
 
 void ComputerVsComputerWindow::on_nextButton_clicked()
 {
-
-    gameWindow =new GameWindow(this,"Player","Computer");
-
-   gameWindow->show();
+    QStringList ComputerLevels ={ui->computer1LevelList->currentText(),
+                              ui->computer2LevelList->currentText()};
+    gameWindow=new GameWindow(this, "Computer1","Computer2",ComputerLevels);
+    gameWindow->show();
     hide();
-
-
-}
-
-
-void ComputerVsComputerWindow::on_MinMaxButton_clicked()
-{
-
-//   ui->MinMaxButton->setStyleSheet(styleSheetForClickedButton);
-//   ui->BetaAlphaButton->setStyleSheet(styleSheetForUnClickedButton);
-//   ui->BettaAlphaIterativeButton->setStyleSheet(styleSheetForUnClickedButton);
-
-
-
-gameWindow =new GameWindow(this,"Player1","Player2");
-   gameWindow->show();
-   hide();
-
-   //gameWindow->setPlayerNamesList("Player","Computer");
-
-}
-
-void ComputerVsComputerWindow::on_BetaAlphaButton_clicked()
-{
-//   ui->MinMaxButton->setStyleSheet(styleSheetForUnClickedButton);
-//   ui->BetaAlphaButton->setStyleSheet(styleSheetForClickedButton);
-//   ui->BettaAlphaIterativeButton->setStyleSheet(styleSheetForUnClickedButton);
-
-   gameWindow =new GameWindow(this,"Player","Computer");
-
-   gameWindow->show();
-   hide();
-
-
-
-}
-
-
-void ComputerVsComputerWindow::on_BettaAlphaIterativeButton_clicked()
-{
-//   ui->MinMaxButton->setStyleSheet(styleSheetForUnClickedButton);
-//   ui->BetaAlphaButton->setStyleSheet(styleSheetForUnClickedButton);
-//   ui->BettaAlphaIterativeButton->setStyleSheet(styleSheetForClickedButton);
-
-   gameWindow =new GameWindow(this,"Computer1","Computer2");
-   gameWindow->show();
-   hide();
-
 
 
 }

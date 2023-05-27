@@ -10,8 +10,10 @@ CONFIG += c++17
 
 SOURCES += \
     GameDispalyCalculation.cpp \
+    ModesWindow.cpp \
     boardsquare.cpp \
     computervscomputerwindow.cpp \
+    computervspersonwindow.cpp \
     gameboard.cpp \
     gamewindow.cpp \
     main.cpp \
@@ -20,15 +22,19 @@ SOURCES += \
 
 HEADERS += \
     GameDispalyCalculation.h \
+    ModesWindow.h \
     boardsquare.h \
     computervscomputerwindow.h \
+    computervspersonwindow.h \
     gameboard.h \
     gamewindow.h \
     mainwindow.h \
     player.h
 
 FORMS += \
+    ModesWindow.ui \
     computervscomputerwindow.ui \
+    computervspersonwindow.ui \
     gamewindow.ui \
     mainwindow.ui
 

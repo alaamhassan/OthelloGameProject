@@ -10,21 +10,21 @@ MainWindow::MainWindow(QWidget *parent)
      QString styleSheet=
        "QPushButton{"
                          "font-size:30px;"
-                         "border-radius:7px;"
+                         "border-radius:38px;"
                          "border: 3px solid #1E3706;"
                          "border-color:#1E3706;"
 
-                         "background-color:#F1F1F1;"
+                         "background-color:#E8E8E8;"
                          "color:#1E3706;"
       "}"
         "QPushButton:hover{"
-                          "background-color:rgb(0, 63, 0);"
-                         "color:rgb(255,255,230);"
+                          "background-color:#1E3706;"
+                         "color:#E8E8E8;"
                          "}"
 
         "QPushButton:pressed{"
-        "background-color: rgb(0, 63, 0);"
-        "color:rgb(255,255,230);"
+        "background-color: :#1E3706;"
+        "color:#E8E8E8;"
         "}"
     ;
 
@@ -77,9 +77,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_AlphaBeta_clicked()
 {
-    computerVsComputerWindow =new ComputerVsComputerWindow(this);
+    modesWindow =new ModesWindow(this);
 
-    computerVsComputerWindow->show();
+    modesWindow->show();
 
     hide();
 

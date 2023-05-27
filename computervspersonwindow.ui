@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ComputerVsComputerWindow</class>
- <widget class="QDialog" name="ComputerVsComputerWindow">
+ <class>ComputerVsPersonWindow</class>
+ <widget class="QDialog" name="ComputerVsPersonWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,6 +13,21 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QListWidget" name="levelList">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>340</y>
+     <width>411</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+  </widget>
   <widget class="QPushButton" name="backButton">
    <property name="geometry">
     <rect>
@@ -36,27 +51,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Next</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="computer1LevelList">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>380</y>
-     <width>421</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="computer2LevelList">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>500</y>
-     <width>421</width>
-     <height>31</height>
-    </rect>
+    <string>Start</string>
    </property>
   </widget>
  </widget>

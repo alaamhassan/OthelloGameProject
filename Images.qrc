@@ -19,5 +19,11 @@
         <file>OthelloDisks/validDisk.jpg</file>
         <file>OthelloDisks/validDisk1.jpg</file>
         <file>OthelloDisks/validDisk2.jpg</file>
+        <file>OthelloDisks/WhiteDisk-display.jpg</file>
+        <file>OthelloDisks/DarkDisk-display.jpg</file>
+    </qresource>
+    <qresource prefix="/computerVScomputerPage">
+        <file>computerVsComputerPage/computerVSComputer.png</file>
+        <file>computerVsComputerPage/test1.png</file>
     </qresource>
 </RCC>

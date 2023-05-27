@@ -1,17 +1,53 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
+#include "ModesWindow.h"
 #include "computervscomputerwindow.h"
+#include "computervspersonwindow.h"
 
 #include <QGraphicsView>
 #include<QDebug>
 #include<QMessageBox>
 
-ComputerVsComputerWindow *optionsWindow;
+ModesWindow *optionsWindow;
+ComputerVsComputerWindow* computerVsComputerWindow;
+ComputerVsPersonWindow* computerVsPersonWindow;
 
-GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name) :
+GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name, QStringList PlayerLevels) :
     QDialog(parent),
     ui(new Ui::GameWindow)
 {
+
+    QString ButtonStyleSheet=
+        "QPushButton{"
+        "font-size:20px;"
+        "border: 2px solid #1E3706;"
+        "border-color:#1E3706;"
+        "background-color:#E8E8E8;"
+        "color:#1E3706;"
+        "}"
+        "QPushButton:hover{"
+        "background-color:#1E3706;"
+        "color:#E8E8E8;"
+        "}"
+
+        "QPushButton:pressed{"
+        "background-color: #1E3706;"
+        "color:#E8E8E8;"
+        "}"
+        ;
+
+    QString BackStyleSheet=
+        "QPushButton{"
+        "font-size:30px;"
+        "border-radius:38px;"
+        "border: 1px solid #1E3706;"
+        "border-color:#1E3706;"
+
+        "background-color:#90978E;"
+        "color:#1E3706;"
+        "}"
+        ;
+
     ui->setupUi(this);
 
     gameBoard =new GameBoard();
@@ -43,6 +79,10 @@ GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name
     ui->Player2R->setText(Player2Name);
     ui->player2RemindedPieces->setText("30");
 
+    ui->RestartButton->setStyleSheet(ButtonStyleSheet);
+    ui->backButton->setStyleSheet(BackStyleSheet);
+
+    ui->graphicsView->setStyleSheet("background-color:#000000;");
 }
 
 
@@ -198,9 +238,26 @@ void GameWindow::on_backButton_clicked()
 
     if(replay==QMessageBox::Yes)
     {
-        optionsWindow =new ComputerVsComputerWindow(this);
-        optionsWindow->show();
-        hide();
+        if(PlayerNamesList[0]=="Player1")
+        {
+            optionsWindow =new ModesWindow(this);
+            optionsWindow->show();
+            hide();
+        }
+        else if (PlayerNamesList[0]=="Player")
+        {
+            computerVsPersonWindow =new ComputerVsPersonWindow();
+            computerVsPersonWindow->show();
+            hide();
+
+        }
+        else if (PlayerNamesList[0]=="Computer1")
+        {
+            computerVsComputerWindow = new ComputerVsComputerWindow();
+            computerVsComputerWindow->show();
+            hide();
+        }
+
 
     }
 

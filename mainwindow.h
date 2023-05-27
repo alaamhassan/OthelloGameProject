@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "computervscomputerwindow.h"
+#include "ModesWindow.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -28,7 +28,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    ComputerVsComputerWindow* computerVsComputerWindow;
+    ModesWindow* modesWindow;
 
 
 };
