@@ -102,18 +102,21 @@
   <widget class="QLabel" name="Player1">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>240</y>
+     <x>100</x>
+     <y>245</y>
      <width>191</width>
      <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
-     <pointsize>20</pointsize>
+     <family>Sakkal Majalla</family>
+     <pointsize>30</pointsize>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(30, 55, 6)</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -122,18 +125,21 @@
   <widget class="QLabel" name="Player2">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>369</y>
+     <x>100</x>
+     <y>374</y>
      <width>191</width>
      <height>51</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
-     <pointsize>20</pointsize>
+     <family>Sakkal Majalla</family>
+     <pointsize>30</pointsize>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(30, 55, 6)</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -142,7 +148,7 @@
   <widget class="QLabel" name="Player1R">
    <property name="geometry">
     <rect>
-     <x>1000</x>
+     <x>1010</x>
      <y>240</y>
      <width>191</width>
      <height>51</height>
@@ -150,10 +156,13 @@
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
-     <pointsize>20</pointsize>
+     <family>Sakkal Majalla</family>
+     <pointsize>30</pointsize>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(30, 55, 6)</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -162,18 +171,21 @@
   <widget class="QLabel" name="Player2R">
    <property name="geometry">
     <rect>
-     <x>1000</x>
-     <y>369</y>
+     <x>1010</x>
+     <y>374</y>
      <width>191</width>
      <height>51</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
-     <pointsize>20</pointsize>
+     <family>Sakkal Majalla</family>
+     <pointsize>30</pointsize>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(30, 55, 6)</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
