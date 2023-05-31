@@ -122,17 +122,17 @@ void GameWindow::RecievePlayerScoreUpdate(QStringList PlayerResponse)
 {
     std::string ResponseTitle =PlayerResponse[0].toStdString();
     QString value =PlayerResponse[1];
-    int PlayerName=0;
+    int PlayerNumber=0;
 
     if(ResponseTitle.compare("Update turn")==0)
     {
-        ui->TurnLabel->setText(value);
+        ui->TurnLabel->setText(value+" Turn");
     }
     else if(ResponseTitle.compare("Player skip This Turn")==0)
     {
 //messageBoxtoSkipTurn
     }
-    else  PlayerName =PlayerResponse[2].toInt();
+    else  PlayerNumber =PlayerResponse[2].toInt();
 
     qDebug()<<"Update Player Score: "<<value;
 
@@ -140,21 +140,21 @@ void GameWindow::RecievePlayerScoreUpdate(QStringList PlayerResponse)
     {
         qDebug()<<"Update Player Score: "<<value;
 
-        if(PlayerName==0)ui->Player1Score->setText(value);
+        if(PlayerNumber==0)ui->Player1Score->setText(value);
 
-        else if(PlayerName==1)ui->Player2Score->setText(value);
+        else if(PlayerNumber==1)ui->Player2Score->setText(value);
 
     }
-    if(ResponseTitle.compare("Update Player Reminded Pieces")==0)
+    else if(ResponseTitle.compare("Update Player Reminded Pieces")==0)
     {
         qDebug()<<"Update Player Reminded Pieces: "<<value;
 
 
-        if(PlayerName==0)ui->player1RemindedPieces->setText(value);
+        if(PlayerNumber==0)ui->player1RemindedPieces->setText(value);
 
-        else if(PlayerName==1)ui->player2RemindedPieces->setText(value);
+        else if(PlayerNumber==1)ui->player2RemindedPieces->setText(value);
     }
-    if(ResponseTitle.compare("did player win?")==0)
+    else if(ResponseTitle.compare("Player win")==0)
     {
         qDebug()<<"did player win?: "<<value;
 
@@ -162,50 +162,57 @@ void GameWindow::RecievePlayerScoreUpdate(QStringList PlayerResponse)
         if(value.toInt()==-1){} //player is lost
         else if(value.toInt()==1){} //player win
 
-        //restart game
+        //disableButtons
+
+        ui->RestartButton->setEnabled(false);
+        ui->backButton->setEnabled(false);
+
+        QString WinPlayer= PlayerNamesList[PlayerNumber] +" Win!";
+      //  if()
+        DisplayGameOver(WinPlayer);
     }
 
 
 
+
 }
-void GameWindow::RecievePlayerRemindedPiecesUpdate(QStringList PlayerResponse)
+
+void GameWindow::DisplayGameOver(QString Message)
 {
-    std::string ResponseTitle =PlayerResponse[0].toStdString();
-    QString remindedPieces =PlayerResponse[1];
-    int PlayerName =PlayerResponse[2].toInt();
 
-    if(ResponseTitle.compare("Update Player Reminded Pieces")==0)
-    {
-        qDebug()<<"Update Player Reminded Pieces: "<<remindedPieces;
+    //draw semi-transparent rect
 
-        //playerList[PlayerName]->UpdateRemindedPices(remindedPieces.toInt());
+    QGraphicsRectItem* transparentPanal =new QGraphicsRectItem(0,0,480,480);
 
-        if(PlayerName==0)ui->player1RemindedPieces->setText(remindedPieces);
+    QBrush transparentbrush;
+    transparentbrush.setStyle(Qt::SolidPattern);
+    transparentbrush.setColor("#1E3706");
+    transparentPanal->setBrush(transparentbrush);
+    transparentPanal->setOpacity(0.43);
+    gameBoard->GetBoardScene()->addItem(transparentPanal);
 
-        else if(PlayerName==1)ui->player2RemindedPieces->setText(remindedPieces);
-    }
+
+    QGraphicsRectItem* GameOverPanal =new QGraphicsRectItem(10,10,460,460);
+
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+    brush.setColor("#F1F1F1");
+    GameOverPanal->setBrush(brush);
+    GameOverPanal->setOpacity(0.75);
+    gameBoard->GetBoardScene()->addItem(GameOverPanal);
+
+
+    //create playAgain button
+  //  Button* playAgainButton=new Button(QString("Play Again"));
+
+
+
+    //create return to modes window button
+
+
+
 
 }
-void GameWindow::RecievePlayerWinOrLostUpdate(QStringList PlayerResponse)
-{
-    std::string ResponseTitle =PlayerResponse[0].toStdString();
-    int isLost =PlayerResponse[1].toInt();
-    int PlayerName =PlayerResponse[2].toInt();
-
-    if(ResponseTitle.compare("did player win?"))
-    {
-        qDebug()<<"did player win?: "<<isLost;
-      //  playerList[PlayerName]->setLostFlag(isLost);
-
-        //trigger message win or lose
-        if(isLost==-1){} //player is lost
-        else if(isLost==1){} //player win
-
-        //restart game
-    }
-}
-
-
 
 void GameWindow::on_RestartButton_clicked()
 {

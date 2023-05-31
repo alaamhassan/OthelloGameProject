@@ -29,7 +29,8 @@ public:
 
     void InitializeBoardForTesting();
 
-    void restartBoard();
+    //disable the board In case of Win,Lose game
+    void disableBoardWhenLoose();
 
 
 signals:

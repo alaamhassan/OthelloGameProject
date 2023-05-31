@@ -91,34 +91,19 @@ void GameBoard::InitializeBoardForTesting()
 
 }
 
-void GameBoard::restartBoard()
+void GameBoard::disableBoardWhenLoose()
 {
-
-
     for(int i=0;i<BoardSqaureList.size();i++)
     {
-        BoardSqaureList[i]->hideDisk();
-//        if(BoardSqaureList[i]->getSquareState()!=0)
-//        {
-//            BoardSqaureList[i]->hideDisk();
-//            BoardSqaureList[i]->setSquareState(0);
-//        }
+        BoardSqaureList[i]->setEnabled(false);
     }
-
-
-
-   // playerList={};
-
 }
-
-
 
 void GameBoard::GetResponseFromTheSquare(QString SquareResponse,QString squareName)
 {
     //to be able to use the assignment operator
     //convert the QString to string
     std::string action = SquareResponse.toStdString();
-   // int squareName =  SquareResponse[1].toInt();
 
     qDebug()<<"Switch turns";
 
@@ -131,12 +116,54 @@ void GameBoard::GetResponseFromTheSquare(QString SquareResponse,QString squareNa
         playerList[playerTurn]->UpdateRemindedPices();
         playerList[playerTurn]->UpdateScore(calculateScoreForAPlayer(playerList[playerTurn]->IsPlayerMaximizer(),BoardSqaureList));
 
+
+        //forTesting
+//        playerList[playerTurn]->UpdateRemindedPices(0);
+//        playerList[(playerTurn+1)%2]->UpdateRemindedPices(0);
+        //end
+
+        //win,orlost=>check
+        //also,check if for two consequitive turns there is no valid moves
+        if(playerList[playerTurn]->getRemindedPieces()==0&&
+            playerList[(playerTurn+1)%2]->getRemindedPieces()==0)
+        {
+
+            //disable the board
+            disableBoardWhenLoose();
+
+
+            if(playerList[playerTurn]->getScore()>playerList[(playerTurn+1)%2]->getScore())
+                playerList[playerTurn]->setWinFlag(1);
+
+            else if(playerList[playerTurn]->getScore()<playerList[(playerTurn+1)%2]->getScore())
+                playerList[(playerTurn+1)%2]->setWinFlag(1);
+
+            //else if there is a draw
+            else
+            playerList[playerTurn]->setWinFlag(0);
+
+
+       }
+
+        else
+        {
+
         playerTurn=(playerTurn+1)%2;
         playerList[playerTurn]->UpdatePlayerTurn();
 
 
 
         if(!isThereAreValidMoves(squareValidMoves))playerList[playerTurn]->NoValidMovesThisTurn();
+
+
+
+
+        //there a valid move,but player doesn't have enough pieces
+        if( playerList[playerTurn]->getRemindedPieces()==0){}
+
+
+        }
+
 
 
     }

@@ -23,11 +23,11 @@ public:
     ~GameWindow();
     void  setPlayerNamesList(QString Player1Name,QString Player2Name);
     void InitializePlayerList(QObject * GameWindow);
+    void DisplayGameOver(QString Message);
 
 public slots:
     void RecievePlayerScoreUpdate(QStringList);
-    void RecievePlayerRemindedPiecesUpdate(QStringList);
-    void RecievePlayerWinOrLostUpdate(QStringList);
+
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
