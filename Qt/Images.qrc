@@ -26,4 +26,7 @@
         <file>computerVsComputerPage/computerVSComputer.png</file>
         <file>computerVsComputerPage/test1.png</file>
     </qresource>
+    <qresource prefix="/gameOver">
+        <file>GameOver/gameOver.png</file>
+    </qresource>
 </RCC>

@@ -86,7 +86,7 @@ ModesWindow::ModesWindow(QWidget *parent) :
         "border-radius:38px;"
         "border: 1px solid #1E3706;"
         "border-color:#1E3706;"
-
+        "box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);"
         "background-color:#90978E;"
         "color:#1E3706;"
         "}"

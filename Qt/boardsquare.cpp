@@ -1,7 +1,7 @@
 #include "boardsquare.h"
-#include"QTimer"
 
-BoardSquare::BoardSquare(int x_coordinate,int y_coordinate,QString SquareName)//:QGraphicsRectItem(parent)
+
+BoardSquare::BoardSquare(int x_coordinate,int y_coordinate,QString SquareName)
 {
     //setting the square x,y coordinates
     this->x_coordinate=x_coordinate;
@@ -24,6 +24,7 @@ BoardSquare::BoardSquare(int x_coordinate,int y_coordinate,QString SquareName)//
     //set the image at the same scene of the square
     DiskImage=new QGraphicsPixmapItem();
     DiskImage->setParentItem(this);
+
 }
 
 void BoardSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -37,44 +38,35 @@ void BoardSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 
 
-    if(pressed)
-    {
-        if(isSquareValidMove)
-        {
 
-            this->DrawDisk();
-            this->setSquareValidMove(0);
+        if(pressed)
+        {
+            if(isSquareValidMove)
+            {
+
+                this->DrawDisk();
+                this->setSquareValidMove(0);
+
+            }
+            else if(this->getSquareState()==0)
+            {
+                brush.setColor("#D92D20");//Qt::red
+                QTimer::singleShot(600, this, &BoardSquare::ChangeInvalidSquareColor);
+
+            }
 
         }
-        else if(this->getSquareState()==0)
+        else
         {
-            brush.setColor("#D92D20");//Qt::red
-
-
-
-//            // Create a timer and set its interval to 3 seconds
-//            QTimer timer;
-//            timer.setInterval(500);
-//            // Connect the timer's timeout signal to a slot that changes the color back
-//            connect(&timer, &QTimer::timeout, this,&BoardSquare::ChangeInvalidSquareColor);
-
-//            // Start the timer
-//            timer.start();
-
-
-
+            if(isSquareValidMove)this->DrawDisk();
+            else if(this->getSquareState()==0)
+                brush.setColor("#006325");
         }
 
-    }
-    else
-    {
-        if(isSquareValidMove)this->DrawDisk();//brush.setColor("#F79009");//Qt::yellow
-        else if(this->getSquareState()==0)
-            brush.setColor("#006325");
-    }
 
    painter->fillRect(rec,brush);
    painter->drawRect(rec);
+
 
 
 }
@@ -118,11 +110,6 @@ void BoardSquare::setSquareState(int sqaureState)
     }
 }
 
-void BoardSquare::RestartSquareToInitial()
-{
-
-}
-
 int BoardSquare::getSquareState()
 {
     return SqaureState;
@@ -131,9 +118,6 @@ int BoardSquare::getSquareState()
 
 void BoardSquare::mousePressEvent(QGraphicsSceneMouseEvent *ev)
 {
-
-
-
     qDebug()<<"reach the press event";
 
     if(isSquareValidMove)
@@ -148,15 +132,13 @@ void BoardSquare::mousePressEvent(QGraphicsSceneMouseEvent *ev)
 
    QGraphicsItem::mousePressEvent(ev);
 
-
 }
 
 void BoardSquare::ChangeInvalidSquareColor()
 {
-    brush.setColor("#006325");
 
+   pressed=false;
    update();
-
 }
 
 

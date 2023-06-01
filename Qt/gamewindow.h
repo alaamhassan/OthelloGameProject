@@ -23,7 +23,7 @@ public:
     ~GameWindow();
     void  setPlayerNamesList(QString Player1Name,QString Player2Name);
     void InitializePlayerList(QObject * GameWindow);
-    void DisplayGameOver(QString Message);
+    void DisplayGameOver(QString Message,int GameFinalScore);
 
 public slots:
     void RecievePlayerScoreUpdate(QStringList);
@@ -36,6 +36,12 @@ private slots:
     void on_RestartButton_clicked();
     void on_backButton_clicked();
 
+    void on_RestartButtonForGameOver_clicked();
+
+    void on_ReturnMenuForGameOver_clicked();
+
+    void on_PlayGameButtonInCaseOfComputer_clicked();
+
 private:
     Ui::GameWindow *ui;
 
@@ -47,8 +53,6 @@ private:
 
 
     QStringList PlayerNamesList;
-
-    bool isRestart=0;
 
 };
 

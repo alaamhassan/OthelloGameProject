@@ -16,14 +16,14 @@ ComputerVsComputerWindow::ComputerVsComputerWindow(QWidget *parent) :
                                   "Level 6","Level 7","Level 8", "Level 9", "Level 10"};
 
     QString LevelListStyleSheet=
-        "QListView"
+        "QComboBox"
         "{"
         "border-radius:2px;"
         "border:2px solid #1E3706;"
         "border-color:#1E3706;"
         "background: #F1F1F1;"
         "}"
-        " QListView QScrollBar"
+        "QComboBox QScrollBar"
         " {"
         " QListView : solid #1E3706;"
         "width:15px;"
@@ -92,8 +92,9 @@ void ComputerVsComputerWindow::resizeEvent(QResizeEvent *event)
 void ComputerVsComputerWindow::on_backButton_clicked()
 {
     modesWindow=new ModesWindow();
-    modesWindow->show();
     hide();
+    modesWindow->show();
+
 }
 
 
@@ -102,8 +103,9 @@ void ComputerVsComputerWindow::on_nextButton_clicked()
     QStringList ComputerLevels ={ui->computer1LevelList->currentText(),
                               ui->computer2LevelList->currentText()};
     gameWindow=new GameWindow(this, "Computer1","Computer2",ComputerLevels);
-    gameWindow->show();
     hide();
+    gameWindow->show();
+
 
 
 }
