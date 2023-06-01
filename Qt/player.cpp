@@ -13,10 +13,11 @@ Player::Player(QString name,int PlayerNumber, bool Maximizer)
 
 void Player::setWinFlag(int isWin)
 {
-    if(isWin==1)
-emit SendPlayerSignal({"Player win",QString::number(Score),QString::number(this->PlayerNumber)});
-    else if(isWin==0)
-emit SendPlayerSignal({"draw game",QString::number(Score),QString::number(this->PlayerNumber)});
+    QString GameOverMessage="";
+    if(isWin==1)GameOverMessage=this->name+" Win!";
+    else if(isWin==0)GameOverMessage="Draw!";
+
+    emit SendPlayerSignal({"GameOver",QString::number(Score),GameOverMessage});
 
 }
 
@@ -46,19 +47,6 @@ void Player::UpdateRemindedPices(int RemindedPieces)
     emit SendPlayerSignal({"Update Player Reminded Pieces",QString::number(this->RemindedPieces),QString::number(this->PlayerNumber)});
 }
 
-//void Player::setLostFlag(int isLost)
-//{
-
-//    this->isLost=isLost;
-
-//    emit SendPlayerSignal({"did player win?",QString::number(isLost),QString::number(this->PlayerNumber)});
-////    if(isLost)
-////    emit SendPlayerSignal({"did player win?",QString::number(isLost),this->name});
-
-////    else if(!isLost)
-////    emit SendPlayerSignal({"did player win?",QString::number(isLost),this->name});
-//}
-
 void Player::UpdatePlayerTurn()
 {
 
@@ -84,4 +72,9 @@ int Player::IsPlayerMaximizer()
 int Player::getScore()
 {
     return Score;
+}
+
+void Player::sendSignalToGameWhenComputerPlay()
+{
+emit SendPlayerSignal({"Computer Play",this->name});
 }

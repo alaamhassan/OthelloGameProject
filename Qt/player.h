@@ -27,6 +27,8 @@ public:
     int IsPlayerMaximizer();
 
     int getScore();
+
+    void sendSignalToGameWhenComputerPlay();
 signals:
     void SendPlayerSignal(QStringList );
 

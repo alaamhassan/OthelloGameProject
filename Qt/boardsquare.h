@@ -8,6 +8,7 @@
 #include <QString>
 #include <QObject>
 #include <QGraphicsSceneMouseEvent>
+#include"QTimer"
 
 class BoardSquare:public QObject,public QGraphicsRectItem
 {
@@ -15,8 +16,14 @@ class BoardSquare:public QObject,public QGraphicsRectItem
     Q_OBJECT
 public:
     BoardSquare(int x_coordiante,int y_coordinate,QString SquareName);
-  //  QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,QWidget *widget) override;
+
+    //getting variables
+    int getSquareState();
+
+    //setting variables
+    void setSquareValidMove(bool isSquareValid);
+    void setSquareState(int squareState);
 
     //draw disk on the square
     void DrawDisk();
@@ -24,21 +31,14 @@ public:
     //hidetheImage
     void hideDisk();
 
-    //setting variables
-    void setSquareValidMove(bool isSquareValid);
-    void setSquareState(int squareState);
-
-    //initialize the square in case of restart
-    void RestartSquareToInitial();
 
     //set the color of the square
     void setSquareColor();
 
-    int getSquareState();
-
-
    //trigger events
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+
+
 
 private:
     //the coordinate of the sqaure
@@ -61,16 +61,16 @@ private:
     bool pressed;
     bool isSquareValidMove;
 
-
     //the disk image
     QGraphicsPixmapItem *DiskImage;
 
-    QBrush brush;
 
 private slots:
     void ChangeInvalidSquareColor();
 signals:
     QString sendSignalsToTheGameBoard(QString,QString);
+
+
 
 };
 

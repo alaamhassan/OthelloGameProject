@@ -15,8 +15,8 @@ GameBoard::GameBoard()
     playerList[1]={};
 
     SetUpBoard();
+    computerIndexTurn=0;
 
-    InitializeBoardForTesting();
 }
 
 
@@ -76,6 +76,13 @@ void GameBoard::setPlayerList(QObject * GameWindow,QString Player1Name, QString 
     playerList[1]=new Player(Player2Name,1, 0); //player2 minimizer
      success=  QObject::connect(playerList[1],SIGNAL(SendPlayerSignal(QStringList)),GameWindow,SLOT(RecievePlayerScoreUpdate(QStringList)));
     Q_ASSERT(success);
+
+
+    std::string FirstplayerName=Player1Name.toStdString();
+
+    if(FirstplayerName.compare("Computer1")!=0)InitializeBoardForTesting();
+
+
 }
 
 void GameBoard::InitializeBoardForTesting()
@@ -91,12 +98,61 @@ void GameBoard::InitializeBoardForTesting()
 
 }
 
-void GameBoard::disableBoardWhenLoose()
+void GameBoard::DisableBoard()
 {
     for(int i=0;i<BoardSqaureList.size();i++)
     {
         BoardSqaureList[i]->setEnabled(false);
     }
+
+    //computerPlay();
+}
+
+void GameBoard::EnableBoard()
+{
+    for(int i=0;i<BoardSqaureList.size();i++)
+    {
+        BoardSqaureList[i]->setEnabled(true);
+    }
+}
+
+void GameBoard::computerPlay()
+{
+
+    while(!(playerList[playerTurn]->getRemindedPieces()==0&&
+             playerList[(playerTurn+1)%2]->getRemindedPieces()==0))
+
+    {
+        delay();
+        BoardSqaureList[ComputerGame[computerIndexTurn].toInt()]->setSquareValidMove(1);
+        BoardSqaureList[ComputerGame[computerIndexTurn].toInt()]->DrawDisk();
+
+        BoardSqaureList[ComputerGame[computerIndexTurn].toInt()]->setSquareState(playerList[playerTurn]->IsPlayerMaximizer());
+
+        playerList[playerTurn]->UpdateRemindedPices();
+        playerList[playerTurn]->UpdateScore(calculateScoreForAPlayer(playerList[playerTurn]->IsPlayerMaximizer(),BoardSqaureList));
+
+
+
+        playerTurn=(playerTurn+1)%2;
+        playerList[playerTurn]->UpdatePlayerTurn();
+
+        computerIndexTurn++;
+
+
+
+    }
+
+    if(playerList[playerTurn]->getScore()>playerList[(playerTurn+1)%2]->getScore())
+        playerList[playerTurn]->setWinFlag(1);
+
+    else if(playerList[playerTurn]->getScore()<playerList[(playerTurn+1)%2]->getScore())
+        playerList[(playerTurn+1)%2]->setWinFlag(1);
+
+    //else if there is a draw
+    else
+        playerList[playerTurn]->setWinFlag(0);
+
 }
 
 void GameBoard::GetResponseFromTheSquare(QString SquareResponse,QString squareName)
@@ -117,6 +173,7 @@ void GameBoard::GetResponseFromTheSquare(QString SquareResponse,QString squareNa
         playerList[playerTurn]->UpdateScore(calculateScoreForAPlayer(playerList[playerTurn]->IsPlayerMaximizer(),BoardSqaureList));
 
 
+        //if()
         //forTesting
 //        playerList[playerTurn]->UpdateRemindedPices(0);
 //        playerList[(playerTurn+1)%2]->UpdateRemindedPices(0);
@@ -129,7 +186,7 @@ void GameBoard::GetResponseFromTheSquare(QString SquareResponse,QString squareNa
         {
 
             //disable the board
-            disableBoardWhenLoose();
+            DisableBoard();
 
 
             if(playerList[playerTurn]->getScore()>playerList[(playerTurn+1)%2]->getScore())
@@ -151,12 +208,7 @@ void GameBoard::GetResponseFromTheSquare(QString SquareResponse,QString squareNa
         playerTurn=(playerTurn+1)%2;
         playerList[playerTurn]->UpdatePlayerTurn();
 
-
-
         if(!isThereAreValidMoves(squareValidMoves))playerList[playerTurn]->NoValidMovesThisTurn();
-
-
-
 
         //there a valid move,but player doesn't have enough pieces
         if( playerList[playerTurn]->getRemindedPieces()==0){}
@@ -168,5 +220,12 @@ void GameBoard::GetResponseFromTheSquare(QString SquareResponse,QString squareNa
 
     }
 
+}
+
+void GameBoard::delay()
+{
+    QTime dieTime= QTime::currentTime().addSecs(1);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
 
