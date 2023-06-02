@@ -1,6 +1,8 @@
 #include "boardsquare.h"
 
 
+//comment
+
 BoardSquare::BoardSquare(int x_coordinate,int y_coordinate,QString SquareName)
 {
     //setting the square x,y coordinates

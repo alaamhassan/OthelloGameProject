@@ -320,14 +320,18 @@ void GameWindow::on_RestartButtonForGameOver_clicked()
     InitializePlayerList(this);
     ui->graphicsView->setScene(gameBoard->GetBoardScene());
 
-
+    ui->TurnLabel->setText(PlayerNamesList[0]+" Turn");
     ui->Player1Score->setText("2");
     ui->player1RemindedPieces->setText("30");
     ui->Player2Score->setText("2");
     ui->player2RemindedPieces->setText("30");
 
 
-
+    if((PlayerNamesList[0].toStdString()).compare("Computer1")==0)
+    {
+        gameBoard->DisableBoard();
+        gameBoard->computerPlay();
+    }
 }
 
 
