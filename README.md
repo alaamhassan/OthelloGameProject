@@ -1,11 +1,9 @@
 # OthelloGameProject
 
 Parts:: 
-
 1)Uml (class,sequence,state) (4) Noura,Heba,Hagar,shreen ### 
 -------------------------------------
-2)gui =>Alaa ##
-
+2)Gui =>Alaa ##
 -------------------------------------
 3)Algo:
 --------------------------------------
@@ -29,11 +27,9 @@ Output:(1,2) square index
 Muhammed,Peter,Devid ### 
 
 notes:
-
 computer 1 (1) Maximuizer black
-
 computer 2 (-1) Min       White
- --------------------------------------
+--------------------------------------
 Input:(1,2) square index + original board(64 array 1D)
 ouput: board after update
 4.=>36 array 1D,(6*6) 2D
