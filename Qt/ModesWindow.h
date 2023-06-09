@@ -18,6 +18,7 @@ class ModesWindow : public QDialog
 
 public:
     explicit ModesWindow(QWidget *parent = nullptr);
+    void InitializeComputerLevelsMap();
     ~ModesWindow();
 
 
@@ -38,7 +39,7 @@ private:
     GameWindow* gameWindow;
     ComputerVsPersonWindow* computerVsPersonWindow;
     ComputerVsComputerWindow* computerVsComputerWindow;
-
+    std::map<QString,int>ComputerLevelsMap;
 };
 
 #endif // MODESWINDOW_H

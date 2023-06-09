@@ -37,7 +37,7 @@ void GameBoard::SetUpBoard()
 
             BoardScene->addItem(square);
 
-            bool success=  QObject::connect(square,SIGNAL(sendSignalsToTheGameBoard(QString,QString)),this,SLOT(GetResponseFromTheSquare(QString,QString)));
+            bool success=  QObject::connect(square,SIGNAL(sendSignalsToTheGameBoard(QString,int)),this,SLOT(GetResponseFromTheSquare(QString,int)));
             Q_ASSERT(success);
 
           if((row ==3||row==4)&&(column==3||column==4) )
@@ -155,7 +155,7 @@ void GameBoard::computerPlay()
 
 }
 
-void GameBoard::GetResponseFromTheSquare(QString SquareResponse,QString squareName)
+void GameBoard::GetResponseFromTheSquare(QString SquareResponse,int squareName)
 {
     //to be able to use the assignment operator
     //convert the QString to string
@@ -167,7 +167,7 @@ void GameBoard::GetResponseFromTheSquare(QString SquareResponse,QString squareNa
     if(action.compare("Switch turns")==0)
     {
 
-        BoardSqaureList[squareName.toInt()]->setSquareState(playerList[playerTurn]->IsPlayerMaximizer());
+        BoardSqaureList[squareName]->setSquareState(playerList[playerTurn]->IsPlayerMaximizer());
 
         playerList[playerTurn]->UpdateRemindedPices();
         playerList[playerTurn]->UpdateScore(calculateScoreForAPlayer(playerList[playerTurn]->IsPlayerMaximizer(),BoardSqaureList));

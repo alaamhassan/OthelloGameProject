@@ -3,7 +3,7 @@
 
 //comment
 
-BoardSquare::BoardSquare(int x_coordinate,int y_coordinate,QString SquareName)
+BoardSquare::BoardSquare(int x_coordinate,int y_coordinate,int SquareName)
 {
     //setting the square x,y coordinates
     this->x_coordinate=x_coordinate;

@@ -25,9 +25,6 @@ ModesWindow::ModesWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QStringList levelLists={"Level 1","Level 2","Level 3","Level 4","Level 5"};
-    ui->comboBox->addItems(levelLists);
-
     QString styleSheet=
         "QPushButton{"
         "font-size:30px;"
@@ -78,7 +75,7 @@ ModesWindow::ModesWindow(QWidget *parent) :
         "selectionColor : rgb(0, 63, 0);"
         "textColor : rgb(0, 63, 0);";
 
-    ui->comboBox->setStyleSheet(QcomboBoxStyleSheet);
+
 
     QString BackAndStartStyleSheet=
         "QPushButton{"
@@ -100,17 +97,6 @@ ModesWindow::ModesWindow(QWidget *parent) :
                               "margin-top:10px;"
                               "margin-bottom:5px;"
                               "font-size:20px;";
-
-    ui->label->setStyleSheet(lebelStyleSheet);
-    ui->label->setAlignment(Qt::AlignCenter);
-
-    ui->label_2->setStyleSheet(lebelStyleSheet);
-    ui->label_2->setAlignment(Qt::AlignCenter);
-
-
-
-
-    ui->chooseModeButton->setStyleSheet("color:#1E3706;font-family:Tenor Sans;");
 }
 
 void ModesWindow::resizeEvent(QResizeEvent *event)

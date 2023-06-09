@@ -15,7 +15,7 @@ class BoardSquare:public QObject,public QGraphicsRectItem
     // the Q_OBJECT macro is mandatory for any object that implements signals, slots or properties (from documentation)
     Q_OBJECT
 public:
-    BoardSquare(int x_coordiante,int y_coordinate,QString SquareName);
+    BoardSquare(int x_coordiante,int y_coordinate,int SquareName);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,QWidget *widget) override;
 
     //getting variables
@@ -51,7 +51,7 @@ private:
     //name that uniquly identify the square
     //the x,y of the square wiht respect to the board(36 squares)
     //if the x,y is 1,2 then the name is "12"
-    QString SquareName;
+    int SquareName;
 
     //a varibale that represent the state of the square
     //if 0:empty, 1:black, -1:whtie
@@ -68,7 +68,7 @@ private:
 private slots:
     void ChangeInvalidSquareColor();
 signals:
-    QString sendSignalsToTheGameBoard(QString,QString);
+    QString sendSignalsToTheGameBoard(QString,int);
 
 
 
