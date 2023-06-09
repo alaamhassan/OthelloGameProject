@@ -15,8 +15,8 @@ typedef enum{BLACK_PLAYER=1,WHITE_PLAYER=-1} playerType;
 
 
 
-int minMax(vector<vector<int>>& board, int player, int depth);					//int board[BOARD_SIZE][BOARD_SIZE]
-pair<int, int> getBestPlay(vector<vector<int>>& board, int player, int depth) ;
+int minMax(int board[BOARD_SIZE][BOARD_SIZE], int player, int depth);					
+pair<int, int> getBestPlay(int board[BOARD_SIZE][BOARD_SIZE], int player, int depth) ;
 
 
 #endif /* MIN_MAX_H_ */
