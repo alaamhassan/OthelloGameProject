@@ -13,10 +13,13 @@ ComputerVsComputerWindow* computerVsComputerWindow;
 ComputerVsPersonWindow* computerVsPersonWindow;
 QString ButtonStyleSheet;
 
-GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name, QStringList PlayerLevels) :
+GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name, int* PlayerLevels) :
     QDialog(parent),
     ui(new Ui::GameWindow)
 {
+
+    qDebug()<<"Level"<<PlayerLevels[0];
+
 
     ButtonStyleSheet=
         "QPushButton{"
@@ -94,6 +97,9 @@ GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name
     {
         gameBoard->DisableBoard();
         ui->PlayGameButtonInCaseOfComputer->setStyleSheet(ButtonStyleSheet);
+
+        //disable (Restart) buttons
+        ui->RestartButton->setEnabled(false);
     }
 
 
@@ -252,9 +258,10 @@ void GameWindow::RestartGame()
 
 void GameWindow::on_RestartButton_clicked()
 {
-    QMessageBox::StandardButton replay =QMessageBox::question(this,"Restart"
-                                                               ,"Are you sure you want to restart the game?",
-                                                               QMessageBox::Yes|QMessageBox::No);
+    QMessageBox::StandardButton replay =
+        QMessageBox::question(this,"Restart"
+        ,"Are you sure you want to restart the game?",
+        QMessageBox::Yes|QMessageBox::No);
 
     if(replay==QMessageBox::Yes)
     {
@@ -266,9 +273,10 @@ void GameWindow::on_RestartButton_clicked()
 
 void GameWindow::on_backButton_clicked()
 {
-    QMessageBox::StandardButton replay =QMessageBox::question(this,"Back"
-                                                               ,"You will lose your progress if you clicked back!",
-                                                               QMessageBox::Yes|QMessageBox::No);
+    QMessageBox::StandardButton replay =
+        QMessageBox::question(this,"Back"
+        ,"You will lose your progress if you clicked back!",
+        QMessageBox::Yes|QMessageBox::No);
 
     if(replay==QMessageBox::Yes)
     {
@@ -329,6 +337,10 @@ void GameWindow::on_ReturnMenuForGameOver_clicked()
 void GameWindow::on_PlayGameButtonInCaseOfComputer_clicked()
 {
     ui->PlayGameButtonInCaseOfComputer->setVisible(false);
+
+    //enable (Restart) buttons
+    ui->RestartButton->setEnabled(true);
+
     gameBoard->computerPlay();
 
 
