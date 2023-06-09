@@ -19,7 +19,31 @@ pair<int, int> getBestPlay(int board[BOARD_SIZE][BOARD_SIZE], int player, int de
         // put disc in the position   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         playscore = minMax(newBoard, (player == BLACK_PLAYER) ? WHITE_PLAYER : BLACK_PLAYER, depth - 1);
         
-		
+		if(player==BLACK_PLAYER)
+		{	/* BLACK_PLAYER is maximizer (bestPlayScore is the highest score)*/
+			if (playscore > bestPlayScore) 
+			{
+				bestPlayScore = playscore;
+				bestPlay = *Position;
+			}
+			else
+			{
+				/* Do Nothing */
+			}
+		}
+		else
+		{	/* WHITE_PLAYER is minimizer (bestPlayScore is the lowest score)*/
+			if (playscore < bestPlayScore) 
+			{
+				bestPlayScore = playscore;
+				bestPlay = *Position;
+			}
+			else
+			{
+				/* Do Nothing */
+			}
+		}
+    }
+    return bestPlay;
 }
-
 
