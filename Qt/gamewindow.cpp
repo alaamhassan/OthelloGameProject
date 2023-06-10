@@ -13,7 +13,7 @@ ComputerVsComputerWindow* computerVsComputerWindow;
 ComputerVsPersonWindow* computerVsPersonWindow;
 QString ButtonStyleSheet;
 
-GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name, QStringList PlayerLevels) :
+GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name, int* PlayerLevels) :
     QDialog(parent),
     ui(new Ui::GameWindow)
 {
@@ -62,23 +62,15 @@ GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name
 
     setMouseTracking(true);
 
-    qDebug()<<"mouse:"<<(ui->graphicsView->hasMouseTracking());
-
     ui->graphicsView->show();
 
-
-    ui->TurnLabel->setText(Player1Name+" Turn");
-
     ui->Player1->setText(Player1Name);
-    ui->Player1Score->setText("2");
-
     ui->Player1R->setText(Player1Name);
-    ui->player1RemindedPieces->setText("30");
 
     ui->Player2->setText(Player2Name);
-    ui->Player2Score->setText("2");
     ui->Player2R->setText(Player2Name);
-    ui->player2RemindedPieces->setText("30");
+
+    InitializeGameWindowLabels();
 
     ui->RestartButton->setStyleSheet(ButtonStyleSheet);
     ui->backButton->setStyleSheet(BackStyleSheet);
@@ -102,6 +94,9 @@ GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name
     {
         gameBoard->DisableBoard();
         ui->PlayGameButtonInCaseOfComputer->setStyleSheet(ButtonStyleSheet);
+
+        //disable (Restart) buttons
+        ui->RestartButton->setEnabled(false);
     }
 
 
@@ -134,7 +129,26 @@ void GameWindow::InitializePlayerList(QObject * GameWindow)
     gameBoard->setPlayerList(GameWindow,PlayerNamesList[0],PlayerNamesList[1]);
 }
 
+void GameWindow::DrawPanalOnGraphicsScnene(std::array<int,4> RectDimentions,QString panalColor,float TransparancyDegree)
+{
+    QGraphicsRectItem* transparentPanal =new QGraphicsRectItem(RectDimentions[0],RectDimentions[1],RectDimentions[2],RectDimentions[3]);
 
+    QBrush transparentbrush;
+    transparentbrush.setStyle(Qt::SolidPattern);
+    transparentbrush.setColor(panalColor);
+    transparentPanal->setBrush(transparentbrush);
+    transparentPanal->setOpacity(TransparancyDegree);
+    gameBoard->GetBoardScene()->addItem(transparentPanal);
+}
+
+void GameWindow::InitializeGameWindowLabels()
+{
+    ui->TurnLabel->setText(PlayerNamesList[0]+" Turn");
+    ui->Player1Score->setText("2");
+    ui->player1RemindedPieces->setText("30");
+    ui->Player2Score->setText("2");
+    ui->player2RemindedPieces->setText("30");
+}
 
 void GameWindow::RecievePlayerScoreUpdate(QStringList PlayerResponse)
 {
@@ -175,15 +189,12 @@ void GameWindow::RecievePlayerScoreUpdate(QStringList PlayerResponse)
 
         else if(PlayerNumber==1)ui->player2RemindedPieces->setText(value);
     }
-//    else if(ResponseTitle.compare("Computer Play")==0)
-//    {
-//        gameBoard->DisableBoard();S
-//    }
     else if(ResponseTitle.compare("GameOver")==0)
     {
         qDebug()<<"GameOver: "<<value;
 
         QString GameOverMessage=PlayerResponse[2];
+
         //disableButtons
         ui->RestartButton->setEnabled(false);
         ui->backButton->setEnabled(false);
@@ -192,40 +203,22 @@ void GameWindow::RecievePlayerScoreUpdate(QStringList PlayerResponse)
     }
 
 
-
-
 }
 
 void GameWindow::DisplayGameOver(QString Message,int GameFinalScore)
 {
 
     //draw semi-transparent rect
+    DrawPanalOnGraphicsScnene({0,0,480,480},"#1E3706",0.43);
 
-    QGraphicsRectItem* transparentPanal =new QGraphicsRectItem(0,0,480,480);
-
-    QBrush transparentbrush;
-    transparentbrush.setStyle(Qt::SolidPattern);
-    transparentbrush.setColor("#1E3706");
-    transparentPanal->setBrush(transparentbrush);
-    transparentPanal->setOpacity(0.43);
-    gameBoard->GetBoardScene()->addItem(transparentPanal);
-
-
-    QGraphicsRectItem* GameOverPanal =new QGraphicsRectItem(10,10,460,460);
-
-    QBrush brush;
-    brush.setStyle(Qt::SolidPattern);
-    brush.setColor("#F1F1F1");
-    GameOverPanal->setBrush(brush);
-    GameOverPanal->setOpacity(0.75);
-    gameBoard->GetBoardScene()->addItem(GameOverPanal);
-
+    //draw GameOver window
+    DrawPanalOnGraphicsScnene({10,10,460,460},"#F1F1F1",0.75);
 
     //set the GameOver buttons (Restart,Menu) to be visible
     ui->RestartButtonForGameOver->setVisible(true);
     ui->ReturnMenuForGameOver->setVisible(true);
 
-    //set the style sheet of thebuttons
+    //set the style sheet of the buttons
     ui->RestartButtonForGameOver->setStyleSheet(ButtonStyleSheet);
     ui->ReturnMenuForGameOver->setStyleSheet(ButtonStyleSheet);
 
@@ -233,39 +226,43 @@ void GameWindow::DisplayGameOver(QString Message,int GameFinalScore)
     ui->GameOverMessageLabel->setVisible(true);
     ui->FinalScoreGameOverLabel->setVisible(true);
 
-    //dispaly message
+    //dispaly gameOver message
     ui->GameOverMessageLabel->setText(Message);
     ui->FinalScoreGameOverLabel->setText("Score: "+QString::number(GameFinalScore));
 
 
 }
 
+
+void GameWindow::RestartGame()
+{
+    gameBoard =new GameBoard();
+    InitializePlayerList(this);
+    ui->graphicsView->setScene(gameBoard->GetBoardScene());
+
+    InitializeGameWindowLabels();
+
+    if((PlayerNamesList[0].toStdString()).compare("Computer1")==0)
+    {
+        gameBoard->DisableBoard();
+        gameBoard->computerPlay();
+    }
+}
+
+
+
+//slots::
+
 void GameWindow::on_RestartButton_clicked()
 {
-    QMessageBox::StandardButton replay =QMessageBox::question(this,"Restart"
-                          ,"Are you sure you want to restart the game?",
-                          QMessageBox::Yes|QMessageBox::No);
+    QMessageBox::StandardButton replay =
+        QMessageBox::question(this,"Restart"
+        ,"Are you sure you want to restart the game?",
+        QMessageBox::Yes|QMessageBox::No);
 
     if(replay==QMessageBox::Yes)
     {
-        gameBoard =new GameBoard();
-        InitializePlayerList(this);
-        ui->graphicsView->setScene(gameBoard->GetBoardScene());
-
-        ui->TurnLabel->setText(PlayerNamesList[0]+" Turn");
-        ui->Player1Score->setText("2");
-        ui->player1RemindedPieces->setText("30");
-        ui->Player2Score->setText("2");
-        ui->player2RemindedPieces->setText("30");
-
-
-        if((PlayerNamesList[0].toStdString()).compare("Computer1")==0)
-        {
-            gameBoard->DisableBoard();
-            gameBoard->computerPlay();
-        }
-
-
+        RestartGame();
     }
 
 }
@@ -273,9 +270,10 @@ void GameWindow::on_RestartButton_clicked()
 
 void GameWindow::on_backButton_clicked()
 {
-    QMessageBox::StandardButton replay =QMessageBox::question(this,"Back"
-                                                               ,"You will lose your progress if you clicked back!",
-                                                               QMessageBox::Yes|QMessageBox::No);
+    QMessageBox::StandardButton replay =
+        QMessageBox::question(this,"Back"
+        ,"You will lose your progress if you clicked back!",
+        QMessageBox::Yes|QMessageBox::No);
 
     if(replay==QMessageBox::Yes)
     {
@@ -304,7 +302,6 @@ void GameWindow::on_backButton_clicked()
 
 }
 
-
 void GameWindow::on_RestartButtonForGameOver_clicked()
 {
     //set the GameOver buttons (Restart,Menu) to not be visible
@@ -315,24 +312,15 @@ void GameWindow::on_RestartButtonForGameOver_clicked()
     ui->GameOverMessageLabel->setVisible(false);
     ui->FinalScoreGameOverLabel->setVisible(false);
 
+    //enable (Restart,back) buttons
+    ui->RestartButton->setEnabled(true);
+    ui->backButton->setEnabled(true);
 
-    gameBoard =new GameBoard();
-    InitializePlayerList(this);
-    ui->graphicsView->setScene(gameBoard->GetBoardScene());
+    //Restart the game
+    RestartGame();
 
-    ui->TurnLabel->setText(PlayerNamesList[0]+" Turn");
-    ui->Player1Score->setText("2");
-    ui->player1RemindedPieces->setText("30");
-    ui->Player2Score->setText("2");
-    ui->player2RemindedPieces->setText("30");
-
-
-    if((PlayerNamesList[0].toStdString()).compare("Computer1")==0)
-    {
-        gameBoard->DisableBoard();
-        gameBoard->computerPlay();
-    }
 }
+
 
 
 void GameWindow::on_ReturnMenuForGameOver_clicked()
@@ -346,6 +334,13 @@ void GameWindow::on_ReturnMenuForGameOver_clicked()
 void GameWindow::on_PlayGameButtonInCaseOfComputer_clicked()
 {
     ui->PlayGameButtonInCaseOfComputer->setVisible(false);
+
+    //enable (Restart) buttons
+    ui->RestartButton->setEnabled(true);
+
     gameBoard->computerPlay();
+
+
 }
+
 

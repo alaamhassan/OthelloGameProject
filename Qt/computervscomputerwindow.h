@@ -14,6 +14,7 @@ class ComputerVsComputerWindow : public QDialog
 
 public:
     explicit ComputerVsComputerWindow(QWidget *parent = nullptr);
+    void InitializeComputerLevelsMap();
     ~ComputerVsComputerWindow();
 
 protected:
@@ -27,6 +28,7 @@ private slots:
 private:
     Ui::ComputerVsComputerWindow *ui;
     GameWindow* gameWindow;
+    std::map<QString,int> ComputerLevelsMap;
 };
 
 #endif // COMPUTERVSCOMPUTERWINDOW_H

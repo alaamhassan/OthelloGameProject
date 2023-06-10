@@ -24,10 +24,23 @@ ComputerVsComputerWindow::ComputerVsComputerWindow(QWidget *parent) :
         "background: #F1F1F1;"
         "}"
         "QComboBox QScrollBar"
-        " {"
+        "{"
         " QListView : solid #1E3706;"
         "width:15px;"
-        " }"
+        "}"
+        "QComboBox::drop-down"
+        "{"
+        "border-radius:1px;"
+        "border:1px solid #1E3706;"
+        "border-color:#1E3706;"
+        "background: #90978E;"
+        "}"
+        "QComboBox::down-arrow"
+        "{"
+        "image:url(:/computerVScomputerPage/computerVsComputerPage/dropArrow.png);"
+        "width:30px;"
+        "height:30px;"
+        "}"
         "QListView:item"
         "{"
         "border:1px solid #1E3706;"
@@ -72,11 +85,28 @@ ComputerVsComputerWindow::ComputerVsComputerWindow(QWidget *parent) :
     ui->backButton->setStyleSheet(BackAndStartStyleSheet);
     ui->nextButton->setStyleSheet(BackAndStartStyleSheet);
 
+    InitializeComputerLevelsMap();
 }
 
 ComputerVsComputerWindow::~ComputerVsComputerWindow()
 {
     delete ui;
+}
+
+void ComputerVsComputerWindow::InitializeComputerLevelsMap()
+{
+    ComputerLevelsMap["Level 1"]=1;
+    ComputerLevelsMap["Level 2"]=2;
+    ComputerLevelsMap["Level 3"]=3;
+    ComputerLevelsMap["Level 4"]=4;
+    ComputerLevelsMap["Level 5"]=5;
+
+    ComputerLevelsMap["Level 6"]=6;
+    ComputerLevelsMap["Level 7"]=7;
+    ComputerLevelsMap["Level 8"]=8;
+    ComputerLevelsMap["Level 9"]=9;
+    ComputerLevelsMap["Level 10"]=10;
+
 }
 
 void ComputerVsComputerWindow::resizeEvent(QResizeEvent *event)
@@ -100,8 +130,8 @@ void ComputerVsComputerWindow::on_backButton_clicked()
 
 void ComputerVsComputerWindow::on_nextButton_clicked()
 {
-    QStringList ComputerLevels ={ui->computer1LevelList->currentText(),
-                              ui->computer2LevelList->currentText()};
+    int ComputerLevels[2] ={ComputerLevelsMap[ui->computer1LevelList->currentText()],
+                              ComputerLevelsMap[ui->computer2LevelList->currentText()]};
     gameWindow=new GameWindow(this, "Computer1","Computer2",ComputerLevels);
     hide();
     gameWindow->show();

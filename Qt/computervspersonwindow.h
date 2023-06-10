@@ -15,6 +15,7 @@ class ComputerVsPersonWindow : public QDialog
 
 public:
     explicit ComputerVsPersonWindow(QWidget *parent = nullptr);
+    void InitializeComputerLevelsMap();
     ~ComputerVsPersonWindow();
 
 protected:
@@ -28,6 +29,8 @@ private:
     Ui::ComputerVsPersonWindow *ui;
 
     GameWindow* gameWindow;
+    std::map<QString,int> ComputerLevelsMap;
+
 };
 
 #endif // COMPUTERVSPERSONWINDOW_H
