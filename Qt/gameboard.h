@@ -52,7 +52,7 @@ signals:
     void sendturnSignalToGameWindow(QString PlayerTurn);
 
 public slots:
-    void GetResponseFromTheSquare(QString SquareResponse,int squareName);
+    void GetResponseFromTheSquare(QString SquareMessage,int squareNumber);
 
 
 private:
@@ -64,7 +64,7 @@ private:
 
     int playerTurn=0;
 
-    const int BoardSquareNames[8][8]
+    const int BoardSquareNumbers[8][8]
         =
         {
             {0,1,2,3,4,5,6,7},

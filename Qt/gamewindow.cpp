@@ -18,9 +18,6 @@ GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name
     ui(new Ui::GameWindow)
 {
 
-    qDebug()<<"Level"<<PlayerLevels[0];
-
-
     ButtonStyleSheet=
         "QPushButton{"
         "font-size:20px;"

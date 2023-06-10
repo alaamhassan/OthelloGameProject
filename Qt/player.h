@@ -10,9 +10,9 @@ class Player: public QObject
     Q_OBJECT
 public:
     //functions
-    Player(QString name,int PlayerNumber, bool Maximizer);
+    Player(QString name,int PlayerNumber, bool IsMaximizer);
 
-    void setWinFlag(int isWin);
+    void setWinFlag(bool isWin);
 
     void UpdateScore(int score);
 
@@ -28,7 +28,6 @@ public:
 
     int getScore();
 
-    void sendSignalToGameWhenComputerPlay();
 signals:
     void SendPlayerSignal(QStringList );
 
@@ -39,9 +38,9 @@ private:
     int Score;
     int RemindedPieces;
     int PlayerNumber;
-    bool Maximizer;
-    //if lost:-1, win:1, other:0
-    int isWin;
+    bool IsMaximizer;
+    //if win:1, draw:0
+    bool isWin;
 
 
 };

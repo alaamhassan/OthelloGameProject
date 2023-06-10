@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
-    QPixmap bkgnd(":/homePage/HomePage/background2.png");//:/homePage/HomePage/homePageImage.png");//:/backGroundImages/HomePage/bluredImage.jpg
+    QPixmap bkgnd(":/homePage/HomePage/background2.png");
     bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
     QPalette p = palette();
     p.setBrush(QPalette::Window, bkgnd);
