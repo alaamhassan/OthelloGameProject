@@ -2,7 +2,7 @@
 #include"GameDispalyCalculation.h"
 
 
-/*Initialize the gameBoard of the board by providing:
+/*Initialize the gameBoard
  *-----------------------------------------------------------------
  *This functions is used when setting the gameBoard in the gameWindow class
  */
@@ -48,6 +48,8 @@ GameBoard::GameBoard()
 /*setting the playerList, which contains two object of the Player class.
  * The variable is set using the setPlayerList() function, which
  * is called in the constructor of the GameWindow class.
+ * -->the GameWindow where passed to be able to establish a connection between the two palyers
+ * and the gameWindow class.
  */
 void GameBoard::setPlayerList(QObject * GameWindow,QString Player1Name, QString Player2Name)
 {
@@ -66,10 +68,10 @@ void GameBoard::setPlayerList(QObject * GameWindow,QString Player1Name, QString 
     * to dispaly them to the user.
     */
     playerList[0]=new Player(Player1Name,0, 1); //Player1 :maximizer
-    QObject::connect(playerList[0],SIGNAL(SendPlayerSignal(QStringList)),GameWindow,SLOT(RecievePlayerScoreUpdate(QStringList)));
+    QObject::connect(playerList[0],SIGNAL(SendPlayerSignal(QStringList)),GameWindow,SLOT(ReciveResponseFromThePlayer(QStringList)));
 
     playerList[1]=new Player(Player2Name,1, 0); //player2 minimizer
-    QObject::connect(playerList[1],SIGNAL(SendPlayerSignal(QStringList)),GameWindow,SLOT(RecievePlayerScoreUpdate(QStringList)));
+    QObject::connect(playerList[1],SIGNAL(SendPlayerSignal(QStringList)),GameWindow,SLOT(ReciveResponseFromThePlayer(QStringList)));
 
 
     //testing
@@ -137,7 +139,7 @@ void GameBoard::SetUpBoard()
        /*for every new row the y-coordinate will increase by 60, to start a new row after the previous one.*/
         Sqaure_YCoordiante+=60;
 
-       /*for every new row the x-coordinate will set to zero, to start the new row starting from left.*/
+       /*for every new row the x-coordinate will be set to zero, to start the new row starting from left.*/
         Square_XCoordiante=0;
     }
 }
@@ -237,9 +239,10 @@ void GameBoard::delay()
 /*---------------------EventResponse--------------------------*/
 
 /*This functions takes a signal from the square, when a player press a square
- * a signal containing the signalMessage (squareMessage), and squareNumber (0->63)
+ * a signal containing the signalMessage (squareMessage), and squareNumber (0->63) is
+ * sent to this function.
  *-------------------------------------------------------------------------------
- * this function is used to generate the board for every turn, then call the Player
+ * this function is used to generate the current board for every turn, then call the Player
  * class functions(which send signals to the GameWindow class, which update the GUI
  * dispalyed to the user).
  * note:add comments to the function #########################################################################################

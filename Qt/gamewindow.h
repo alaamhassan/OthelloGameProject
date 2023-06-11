@@ -21,7 +21,7 @@ class GameWindow : public QDialog
 public:
     explicit GameWindow(QWidget *parent = nullptr,QString Player1Name="",QString Player2Name="",int* ={});
     ~GameWindow();
-    void  setPlayerNamesList(QString Player1Name,QString Player2Name);
+
     void InitializePlayerList(QObject * GameWindow);
     void DisplayGameOver(QString Message,int GameFinalScore);
     void DrawPanalOnGraphicsScnene(std::array<int,4> RectDimentions,QString panalColor,float TransparancyDegree);
@@ -29,7 +29,7 @@ public:
     void RestartGame();
 
 public slots:
-    void RecievePlayerScoreUpdate(QStringList);
+    void ReciveResponseFromThePlayer(QStringList);
 
 
 protected:

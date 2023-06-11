@@ -19,6 +19,7 @@ ModesWindow::ModesWindow(QWidget *parent) :
         "background-color:#E8E8E8;"
         "color:#1E3706;"
         "}"
+
         "QPushButton:hover{"
         "background-color:#1E3706;"
         "color:#E8E8E8;"
@@ -34,12 +35,27 @@ ModesWindow::ModesWindow(QWidget *parent) :
     QString BackAndStartStyleSheet=
         "QPushButton{"
         "font-size:30px;"
-        "border-radius:38px;"
-        "border: 1px solid #1E3706;"
+        "border-radius:10px;"
+        "border: 2px solid #1E3706;"
         "border-color:#1E3706;"
-        "box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);"
         "background-color:#90978E;"
         "color:#1E3706;"
+        "}"
+
+        "QPushButton:hover{"
+        "border-radius:10px;"
+        "border: 2px solid #90978E;"
+        "border-color:#90978E;"
+        "background-color:#1E3706;"
+        "color:#90978E;"
+        "}"
+
+        "QPushButton:pressed{"
+        "border-radius:10px;"
+        "border: 2px solid #90978E;"
+        "border-color:#90978E;"
+        "background-color:#1E3706;"
+        "color:#90978E;"
         "}"
         ;
 

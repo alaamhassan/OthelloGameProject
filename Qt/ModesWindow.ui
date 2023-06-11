@@ -28,13 +28,6 @@
      <height>201</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>Segoe UI</family>
-     <bold>false</bold>
-     <strikeout>false</strikeout>
-    </font>
-   </property>
    <property name="styleSheet">
     <string notr="true">&lt;p&gt;PERSON&lt;b&gt; VS&lt;/b&gt; PERSON&lt;/p&gt;</string>
    </property>
