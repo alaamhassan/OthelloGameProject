@@ -64,12 +64,27 @@ ComputerVsComputerWindow::ComputerVsComputerWindow(QWidget *parent) :
     QString BackAndStartStyleSheet=
         "QPushButton{"
         "font-size:30px;"
-        "border-radius:38px;"
-        "border: 1px solid #1E3706;"
+        "border-radius:10px;"
+        "border: 2px solid #1E3706;"
         "border-color:#1E3706;"
-
         "background-color:#90978E;"
         "color:#1E3706;"
+        "}"
+
+        "QPushButton:hover{"
+        "border-radius:10px;"
+        "border: 2px solid #90978E;"
+        "border-color:#90978E;"
+        "background-color:#1E3706;"
+        "color:#90978E;"
+        "}"
+
+        "QPushButton:pressed{"
+        "border-radius:10px;"
+        "border: 2px solid #90978E;"
+        "border-color:#90978E;"
+        "background-color:#1E3706;"
+        "color:#90978E;"
         "}"
         ;
 

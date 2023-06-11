@@ -22,6 +22,11 @@
      <height>51</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Georgia</family>
+    </font>
+   </property>
    <property name="text">
     <string>Back</string>
    </property>
@@ -34,6 +39,11 @@
      <width>121</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Georgia</family>
+    </font>
    </property>
    <property name="text">
     <string>Start</string>

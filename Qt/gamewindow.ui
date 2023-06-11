@@ -16,7 +16,7 @@
   <widget class="QGraphicsView" name="graphicsView">
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>395</x>
      <y>150</y>
      <width>500</width>
      <height>500</height>
@@ -213,7 +213,7 @@
   <widget class="QPushButton" name="RestartButton">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>425</x>
      <y>660</y>
      <width>451</width>
      <height>29</height>
@@ -232,8 +232,14 @@
      <height>51</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Georgia</family>
+     <bold>false</bold>
+    </font>
+   </property>
    <property name="text">
-    <string>back</string>
+    <string>Back</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -291,7 +297,7 @@
   <widget class="QPushButton" name="RestartButtonForGameOver">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>570</x>
      <y>410</y>
      <width>171</width>
      <height>41</height>
@@ -304,7 +310,7 @@
   <widget class="QPushButton" name="ReturnMenuForGameOver">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>570</x>
      <y>520</y>
      <width>171</width>
      <height>41</height>
@@ -317,9 +323,9 @@
   <widget class="QLabel" name="GameOverMessageLabel">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>510</x>
      <y>220</y>
-     <width>231</width>
+     <width>281</width>
      <height>51</height>
     </rect>
    </property>
@@ -340,7 +346,7 @@
   <widget class="QLabel" name="FinalScoreGameOverLabel">
    <property name="geometry">
     <rect>
-     <x>580</x>
+     <x>590</x>
      <y>300</y>
      <width>361</width>
      <height>61</height>
@@ -360,11 +366,17 @@
   <widget class="QPushButton" name="PlayGameButtonInCaseOfComputer">
    <property name="geometry">
     <rect>
-     <x>540</x>
+     <x>558</x>
      <y>340</y>
      <width>171</width>
      <height>121</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Georgia</family>
+     <pointsize>30</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Play</string>

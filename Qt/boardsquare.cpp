@@ -44,7 +44,9 @@ BoardSquare::BoardSquare(int x_coordinate,int y_coordinate,int squareNumber)
 
 }
 
+
 /*---------------------Setter--------------------------*/
+
 /*used to set the square to be valid (true) or not(false).*/
 void BoardSquare::setSquareValidMove(bool isSquareValid)
 {
@@ -63,6 +65,7 @@ void BoardSquare::setSquareState(int sqaureState)
         this->SqaureState=sqaureState;
 }
 
+
 /*---------------------Getter--------------------------*/
 
 /*return the square state*/
@@ -70,6 +73,7 @@ int BoardSquare::getSquareState()
 {
     return SqaureState;
 }
+
 
 /*---------------------Functions--------------------------*/
 
@@ -193,6 +197,7 @@ void BoardSquare::hideDisk()
 {
     DiskImage->hide();
 }
+
 
 /*---------------------Events--------------------------*/
 
