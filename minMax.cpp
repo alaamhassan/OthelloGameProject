@@ -2,13 +2,25 @@
 
 #include "minMax.h"
 
+void copyBoard(int board[BOARD_SIZE][BOARD_SIZE],int newBoard[BOARD_SIZE][BOARD_SIZE])
+{
+	int i,j;
+	for(i=0;i<BOARD_SIZE;i++)
+	{
+		for(j=0;j<BOARD_SIZE;j++)
+		{
+			newBoard[i][j]=board[i][j];
+		}
+	
+	}
+}
 
 pair<int, int> getBestPlay(int board[BOARD_SIZE][BOARD_SIZE], int player, int depth) {
     int bestPlayScore = (player==BLACK_PLAYER)? MIN_SCORE:MAX_SCORE;
 	int discRow ;
     int discCol ;
 	int playscore;
-	vector<vector<int>> newBoard;
+	int newBoard[BOARD_SIZE][BOARD_SIZE];
 	vector<pair<int, int>> PossiblePositions = getPossiblePositions(board, player);
     pair<int, int> bestPlay = make_pair(-1, -1);
 	
@@ -16,9 +28,10 @@ pair<int, int> getBestPlay(int board[BOARD_SIZE][BOARD_SIZE], int player, int de
 	{
 		discRow = Position->first;
 		discCol = Position->second;
-        // put disc in the position   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-        playscore = minMax(newBoard, (player == BLACK_PLAYER) ? WHITE_PLAYER : BLACK_PLAYER, depth - 1);
-        
+       		copyBoard(board,newBoard);
+	    	update_array(newBoard,discRow,discCol,player);
+       	 	playscore = minMax(newBoard, (player == BLACK_PLAYER) ? WHITE_PLAYER : BLACK_PLAYER, depth - 1);
+        	
 		if(player==BLACK_PLAYER)
 		{	/* BLACK_PLAYER is maximizer (bestPlayScore is the highest score)*/
 			if (playscore > bestPlayScore) 
@@ -55,7 +68,7 @@ int minMax(int board[BOARD_SIZE][BOARD_SIZE], int player, int depth)
 	int playScore;
 	int discRow;
 	int discCol;
-	vector<vector<int>> newBoard;
+	int newBoard[BOARD_SIZE][BOARD_SIZE];
 	vector<pair<int, int>> PossiblePositions;
     if (depth == 0 || getPossiblePositions(board, player).empty()) {
         return evaluateBoard(board, BLACK_PLAYER);
@@ -72,7 +85,8 @@ int minMax(int board[BOARD_SIZE][BOARD_SIZE], int player, int depth)
 	{
 		discRow = Position->first;
 		discCol = Position->second;
-		 // put disc in the position @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		copyBoard(board,newBoard);
+	    	update_array(newBoard,discRow,discCol,player);
 		playScore = minMax(newBoard, (player == BLACK_PLAYER)? WHITE_PLAYER:BLACK_PLAYER , depth - 1);
 		
 		if(player==BLACK_PLAYER)
