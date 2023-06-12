@@ -19,7 +19,7 @@ class GameWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit GameWindow(QWidget *parent = nullptr,QString Player1Name="",QString Player2Name="",int* ={});
+    explicit GameWindow(QWidget *parent = nullptr,QString Player1Name="",QString Player2Name="",int Player1Level=1,int Player2Level=1);
     ~GameWindow();
 
     void InitializePlayerList(QObject * GameWindow);
@@ -57,6 +57,10 @@ private:
 
 
     QStringList PlayerNamesList;
+
+    //int* PlayerLevels;
+
+    int PlayerLevels[2]={1,1};
 
 };
 

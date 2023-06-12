@@ -21,6 +21,8 @@ public:
     //getting variables
     int getSquareState();
 
+    bool getSquareValidMove();
+
     //setting variables
     void setSquareValidMove(bool isSquareValid);
     void setSquareState(int squareState);
@@ -60,6 +62,7 @@ private:
     //properities for triggering events
     bool pressed;
     bool isSquareValidMove;
+
 
     //the disk image
     QGraphicsPixmapItem *DiskImage;

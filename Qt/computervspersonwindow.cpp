@@ -126,8 +126,7 @@ void ComputerVsPersonWindow::on_backButton_clicked()
 
 void ComputerVsPersonWindow::on_nextButton_clicked()
 {
-    int computer1Level[2] ={ComputerLevelsMap[ui->levelList->currentItem()->text()]};
-    gameWindow =new GameWindow(this,"Player","Computer",computer1Level);
+    gameWindow =new GameWindow(this,"Player","Computer",1,ComputerLevelsMap[ui->levelList->currentItem()->text()]);
     gameWindow->show();
     hide();
 }

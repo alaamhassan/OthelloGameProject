@@ -6,7 +6,7 @@
  * takes index 0, the other takes 1.
  * 3.IsMaximizer: which is a boolean variable indicate if the current player is maximizer or not.
  */
-Player::Player(QString name,int PlayerNumber, bool IsMaximizer)
+Player::Player(QString name,int PlayerNumber, bool IsMaximizer,int  playerLevel)
 {
     this->name=name;
     this->PlayerNumber=PlayerNumber;
@@ -30,6 +30,8 @@ Player::Player(QString name,int PlayerNumber, bool IsMaximizer)
     this->RemindedPieces=30;
     /*3.isWin:is set initialy to zero, if the player won, isWin will be set to 1.*/
     this->isWin=0;
+
+    this->playerLevel=playerLevel;
 }
 
 /*---------------------Setter--------------------------*/
@@ -58,6 +60,11 @@ void Player::setWinFlag(bool isWin)
     * 2.the game over message.
     */
     emit SendPlayerSignal({"GameOver",QString::number(Score),GameOverMessage});
+}
+
+void Player::setIsThereValidMoves(bool isThereValidMoves)
+{
+    this->IsTherevalidMoves=isThereValidMoves;
 }
 
 /*this function is called using one of the players in the PlayerList in the gameBoard class.
@@ -123,6 +130,21 @@ int Player::getRemindedPieces()
     return RemindedPieces;
 }
 
+int Player::getPlayerLevel()
+{
+    return playerLevel;
+}
+
+QString Player::getPlayerName()
+{
+    return name;
+}
+
+bool Player::IsThereValidMoves()
+{
+    return IsTherevalidMoves;
+}
+
 /*return 1(if maximizer), -1(minimizer) */
 int Player::IsPlayerMaximizer()
 {
@@ -139,4 +161,9 @@ int Player::getScore()
 void Player::NoValidMovesThisTurn()
 {
     emit SendPlayerSignal({"Player skip This Turn",this->name});
+}
+
+void Player::TakePiecesFromOppenent()
+{
+    emit SendPlayerSignal({"Player will take a piece from opponent",this->name});
 }
