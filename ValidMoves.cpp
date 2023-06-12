@@ -85,21 +85,5 @@ int getOpponent(int player) {
 	return (player == 1) ? -1 : 1;
 }
 
-int countPlayerDiscs(int board[BOARD_SIZE][BOARD_SIZE], int player) {
-	int count = 0;
-	for (int i = 0; i < BOARD_SIZE; i++) {
-		for (int j = 0; j < BOARD_SIZE; j++) {
-			if (board[i][j] == player) {
-				count++;
-			}
-		}
-	}
-	return count;
-}
 
-int evaluateBoard(int board[BOARD_SIZE][BOARD_SIZE], int player) {
-	int playerDiscs = countPlayerDiscs(board, player);
-	int opponentDiscs = countPlayerDiscs(board, getOpponent(player));
-	return playerDiscs - opponentDiscs;
-}
 
