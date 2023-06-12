@@ -103,23 +103,3 @@ int evaluateBoard(int board[BOARD_SIZE][BOARD_SIZE], int player) {
 	return playerDiscs - opponentDiscs;
 }
 
-int main() {
-	int board[BOARD_SIZE][BOARD_SIZE];
-	initializeBoard(board);
-
-	int player = 1;
-	vector<pair<int, int>> possiblePositions = getPossiblePositions(board, player);
-
-	// Print the possible positions
-	for (auto position : possiblePositions) {
-		cout << "Possible position: (" << position.first << ", " << position.second << ")" << endl;
-	}
-
-	if (possiblePositions.empty()) {
-		cout << "No valid moves available for player " << player << ". Pass." << endl;
-		player = getOpponent(player);
-	}
-	cout<< "Coin Difference is "<<evaluateBoard(board,player);
-	return 0;
-}
-
