@@ -2,6 +2,7 @@
 #include"cmath"
 
 
+//comment
 /*Initialize the gameBoard
  *-----------------------------------------------------------------
  *This functions is used when setting the gameBoard in the gameWindow class
