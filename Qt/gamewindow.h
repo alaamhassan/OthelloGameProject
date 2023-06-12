@@ -19,14 +19,17 @@ class GameWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit GameWindow(QWidget *parent = nullptr,QString Player1Name="",QString Player2Name="",QStringList ={});
+    explicit GameWindow(QWidget *parent = nullptr,QString Player1Name="",QString Player2Name="",int* ={});
     ~GameWindow();
-    void  setPlayerNamesList(QString Player1Name,QString Player2Name);
+
     void InitializePlayerList(QObject * GameWindow);
-    void DisplayGameOver(QString Message);
+    void DisplayGameOver(QString Message,int GameFinalScore);
+    void DrawPanalOnGraphicsScnene(std::array<int,4> RectDimentions,QString panalColor,float TransparancyDegree);
+    void InitializeGameWindowLabels();
+    void RestartGame();
 
 public slots:
-    void RecievePlayerScoreUpdate(QStringList);
+    void ReciveResponseFromThePlayer(QStringList);
 
 
 protected:
@@ -35,6 +38,13 @@ protected:
 private slots:
     void on_RestartButton_clicked();
     void on_backButton_clicked();
+
+    void on_RestartButtonForGameOver_clicked();
+
+    void on_ReturnMenuForGameOver_clicked();
+
+    void on_PlayGameButtonInCaseOfComputer_clicked();
+
 
 private:
     Ui::GameWindow *ui;
@@ -47,8 +57,6 @@ private:
 
 
     QStringList PlayerNamesList;
-
-    bool isRestart=0;
 
 };
 

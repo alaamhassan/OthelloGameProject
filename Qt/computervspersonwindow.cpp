@@ -52,28 +52,62 @@ QString LevelListStyleSheet=
     QString BackAndStartStyleSheet=
         "QPushButton{"
         "font-size:30px;"
-        "border-radius:38px;"
-        "border: 1px solid #1E3706;"
+        "border-radius:10px;"
+        "border: 2px solid #1E3706;"
         "border-color:#1E3706;"
-
         "background-color:#90978E;"
         "color:#1E3706;"
+        "}"
+
+        "QPushButton:hover{"
+        "border-radius:10px;"
+        "border: 2px solid #90978E;"
+        "border-color:#90978E;"
+        "background-color:#1E3706;"
+        "color:#90978E;"
+        "}"
+
+        "QPushButton:pressed{"
+        "border-radius:10px;"
+        "border: 2px solid #90978E;"
+        "border-color:#90978E;"
+        "background-color:#1E3706;"
+        "color:#90978E;"
         "}"
         ;
 
     ui->nextButton->setStyleSheet(BackAndStartStyleSheet);
     ui->backButton->setStyleSheet(BackAndStartStyleSheet);
 
+    InitializeComputerLevelsMap();
 }
+
 
 ComputerVsPersonWindow::~ComputerVsPersonWindow()
 {
     delete ui;
+
+}
+
+void ComputerVsPersonWindow::InitializeComputerLevelsMap()
+{
+    ComputerLevelsMap["Level 1"]=1;
+    ComputerLevelsMap["Level 2"]=2;
+    ComputerLevelsMap["Level 3"]=3;
+    ComputerLevelsMap["Level 4"]=4;
+    ComputerLevelsMap["Level 5"]=5;
+
+    ComputerLevelsMap["Level 6"]=6;
+    ComputerLevelsMap["Level 7"]=7;
+    ComputerLevelsMap["Level 8"]=8;
+    ComputerLevelsMap["Level 9"]=9;
+    ComputerLevelsMap["Level 10"]=10;
+
 }
 
 void ComputerVsPersonWindow::resizeEvent(QResizeEvent *event)
 {
-    QPixmap bkgnd(":/homePage/HomePage/chooseLevel.png");//:/homePage/HomePage/homePageImage.png");//:/backGroundImages/HomePage/bluredImage.jpg
+    QPixmap bkgnd(":/homePage/HomePage/chooseLevel.png");
     bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
     QPalette p = palette();
     p.setBrush(QPalette::Window, bkgnd);
@@ -92,7 +126,7 @@ void ComputerVsPersonWindow::on_backButton_clicked()
 
 void ComputerVsPersonWindow::on_nextButton_clicked()
 {
-    QStringList computer1Level ={ui->levelList->currentItem()->text()};
+    int computer1Level[2] ={ComputerLevelsMap[ui->levelList->currentItem()->text()]};
     gameWindow =new GameWindow(this,"Player","Computer",computer1Level);
     gameWindow->show();
     hide();

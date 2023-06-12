@@ -16,7 +16,7 @@
   <widget class="QGraphicsView" name="graphicsView">
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>395</x>
      <y>150</y>
      <width>500</width>
      <height>500</height>
@@ -194,8 +194,8 @@
   <widget class="QLabel" name="TurnLabel">
    <property name="geometry">
     <rect>
-     <x>590</x>
-     <y>117</y>
+     <x>550</x>
+     <y>113</y>
      <width>481</width>
      <height>41</height>
     </rect>
@@ -213,7 +213,7 @@
   <widget class="QPushButton" name="RestartButton">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>425</x>
      <y>660</y>
      <width>451</width>
      <height>29</height>
@@ -232,8 +232,14 @@
      <height>51</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Georgia</family>
+     <bold>false</bold>
+    </font>
+   </property>
    <property name="text">
-    <string>back</string>
+    <string>Back</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -286,6 +292,94 @@
    </property>
    <property name="text">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/BoardDisks/OthelloDisks/WhiteDisk-display.jpg&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="RestartButtonForGameOver">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>410</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Restart</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ReturnMenuForGameOver">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>520</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Menu</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="GameOverMessageLabel">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>220</y>
+     <width>281</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sakkal Majalla</family>
+     <pointsize>40</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(30, 55, 6)</string>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="FinalScoreGameOverLabel">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>300</y>
+     <width>361</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>25</pointsize>
+     <italic>true</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PlayGameButtonInCaseOfComputer">
+   <property name="geometry">
+    <rect>
+     <x>558</x>
+     <y>340</y>
+     <width>171</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Georgia</family>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Play</string>
    </property>
   </widget>
  </widget>
