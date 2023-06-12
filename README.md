@@ -2,18 +2,18 @@
 ##### This is an implementation of the Minimax algorithm for playing the game of Othello.
 ##### The Minimax algorithm is a recursive algorithm used to determine the optimal move in a game with multiple players, 
 ##### typically a two-player game.
-# othello Game
+## othello Game
 ##### Othello is a strategy board game played on an 8x8 board.
 ##### The goal of the game is to have the majority of your colored discs (either black or white) on the board at the end of the game.
 ##### Players take turns placing discs on the board, flipping their opponent's discs to their own color by trapping them between two of their own discs.
-# MinMax Algorthim 
+## MinMax Algorthim 
 ##### The Minimax algorithm evaluates the possible moves in the game by assigning a value to each game state. 
 ##### This value represents how favorable the state is for a given player. 
 ##### The algorithm recursively explores the game tree, considering both the current player's moves and the opponent's potential moves.
 ##### At each level of the tree, the algorithm alternates between maximizing the score (when it's the current player's turn) 
 ##### and minimizing the score (when it's the opponent's turn). By assuming that the opponent plays optimally, 
 ##### the algorithm selects the move that maximizes the minimum value of the resulting positions.
-# implementation 
+## implementation 
 The implementation of the Minimax algorithm for Othello involves the following steps:
 
 1) Generate all legal moves for the current player.
@@ -25,7 +25,7 @@ The implementation of the Minimax algorithm for Othello involves the following s
 ### Eample:
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Minimax.svg/1280px-Minimax.svg.png" width="400"/>
 
-# conclusion 
+## conclusion 
 The Minimax algorithm is a powerful technique for determining the optimal move in a game like Othello. By recursively exploring the game tree and considering the opponent's moves, it can find a move that maximizes the minimum value of the resulting positions.
 
  
