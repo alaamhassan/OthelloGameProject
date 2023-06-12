@@ -51,6 +51,15 @@ BoardSquare::BoardSquare(int x_coordinate,int y_coordinate,int squareNumber)
 void BoardSquare::setSquareValidMove(bool isSquareValid)
 {
     isSquareValidMove=isSquareValid;
+//    if(isSquareValid)
+//    {
+//        isSquareValidMove=isSquareValid;
+
+//        update();
+//    }
+//    else
+//        hideDisk();
+
 }
 
 /*used to set the square state*/
@@ -61,8 +70,8 @@ void BoardSquare::setSquareState(int sqaureState)
      * else:
      * no action will be taken.
      */
-    if(sqaureState==1 ||sqaureState==-1)
-        this->SqaureState=sqaureState;
+    //if(sqaureState==1 ||sqaureState==-1)
+    this->SqaureState=sqaureState;
 }
 
 
@@ -72,6 +81,11 @@ void BoardSquare::setSquareState(int sqaureState)
 int BoardSquare::getSquareState()
 {
     return SqaureState;
+}
+
+bool BoardSquare::getSquareValidMove()
+{
+    return isSquareValidMove;
 }
 
 
@@ -182,7 +196,7 @@ void BoardSquare::DrawDisk()
     */
     if(SqaureState==1)DiskImagePath=":/BoardDisks/OthelloDisks/DarkDisk.jpg";
     else if (SqaureState==-1)DiskImagePath=":/BoardDisks/OthelloDisks/WhiteDisk.jpg";
-    else if (isSquareValidMove)DiskImagePath=":/BoardDisks/OthelloDisks/validDisk2.jpg";
+    else if (isSquareValidMove)DiskImagePath=":/BoardDisks/OthelloDisks/validDisk.jpg";//":/BoardDisks/OthelloDisks/validDisk2.jpg";
 
     DiskImage->setPixmap(DiskImagePath);
 

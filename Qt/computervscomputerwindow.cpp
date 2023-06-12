@@ -147,7 +147,7 @@ void ComputerVsComputerWindow::on_nextButton_clicked()
 {
     int ComputerLevels[2] ={ComputerLevelsMap[ui->computer1LevelList->currentText()],
                               ComputerLevelsMap[ui->computer2LevelList->currentText()]};
-    gameWindow=new GameWindow(this, "Computer1","Computer2",ComputerLevels);
+    gameWindow=new GameWindow(this, "Computer1","Computer2",ComputerLevels[0],ComputerLevels[1]);
     hide();
     gameWindow->show();
 

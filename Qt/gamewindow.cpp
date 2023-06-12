@@ -13,12 +13,13 @@ ComputerVsComputerWindow* computerVsComputerWindow;
 ComputerVsPersonWindow* computerVsPersonWindow;
 QString ButtonStyleSheet;
 
+
 /*Initialize the gameWindow by providing:
  * Player1Name, Player2Name: which are provided by the user choice from the modesWindow.
  * PlayerLevels: which are provided by the user choice from the ComputerVsPerson or
  * ComputerVsComputerWindow.
  */
-GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name, int* PlayerLevels) :
+GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name, int Player1Level,int Player2Level) :
     QDialog(parent),
     ui(new Ui::GameWindow)
 {
@@ -99,6 +100,9 @@ GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name
     * in the gameBoard class, and display the players information in the gameWindow.
     */
     PlayerNamesList={Player1Name,Player2Name} ;
+
+    PlayerLevels[0]=Player1Level;
+    PlayerLevels[1]=Player2Level;
 
 
    /*----------------------setting the baord scene and view----------------------*/
@@ -232,7 +236,7 @@ void GameWindow::resizeEvent(QResizeEvent *event)
  */
 void GameWindow::InitializePlayerList(QObject * GameWindow)
 {
-    gameBoard->setPlayerList(GameWindow,PlayerNamesList[0],PlayerNamesList[1]);
+    gameBoard->setPlayerList(GameWindow,PlayerNamesList[0],PlayerNamesList[1],PlayerLevels);
 }
 
 /*this function is used to draw a panal on the gameWindow graphics scene, by providing:
@@ -306,7 +310,7 @@ void GameWindow::ReciveResponseFromThePlayer(QStringList PlayerResponse)
     {
         QMessageBox::StandardButton skip =
             QMessageBox::information(this,"skip"
-                                  ,"skip this turn",
+                                  ,value+" will skip this turn",
                                   QMessageBox::Yes);
     }
 
@@ -361,6 +365,20 @@ void GameWindow::ReciveResponseFromThePlayer(QStringList PlayerResponse)
         * 3.restart and menu buttons.
         */
         DisplayGameOver(GameOverMessage,value.toInt());
+    }
+
+    else if(ResponseTitle.compare("Player will take a piece from opponent")==0)
+    {
+        QString otherPlayerName="";
+
+        if(PlayerNamesList[0]!=value)otherPlayerName=PlayerNamesList[0];
+        else
+            otherPlayerName=PlayerNamesList[1];
+
+        QMessageBox::StandardButton takePiecesFromOpponent =
+            QMessageBox::information(this,"TakePiecesFromOpponent"
+                                     ,value+" will take a piece from "+otherPlayerName,
+                                     QMessageBox::Yes);
     }
 }
 

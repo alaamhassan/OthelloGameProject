@@ -10,9 +10,11 @@ class Player: public QObject
     Q_OBJECT
 public:
     //functions
-    Player(QString name,int PlayerNumber, bool IsMaximizer);
+    Player(QString name,int PlayerNumber, bool IsMaximizer, int playerLevel=0);
 
     void setWinFlag(bool isWin);
+
+    void setIsThereValidMoves(bool isThereValidMoves);
 
     void UpdateScore(int score);
 
@@ -22,9 +24,18 @@ public:
 
     void NoValidMovesThisTurn();
 
+
     int getRemindedPieces();
 
+    int getPlayerLevel();
+
+    QString getPlayerName();
+
+    bool IsThereValidMoves();
+
     int IsPlayerMaximizer();
+
+    void TakePiecesFromOppenent();
 
     int getScore();
 
@@ -41,6 +52,10 @@ private:
     bool IsMaximizer;
     //if win:1, draw:0
     bool isWin;
+
+    int playerLevel;
+
+    bool IsTherevalidMoves;
 
 
 };
