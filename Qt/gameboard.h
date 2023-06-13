@@ -59,6 +59,7 @@ public:
     void restartValidMovesToZero(std::vector<std::pair<int, int>> possiblePositions);
 
 
+    int CanPlayerPlay(int player);
     /*---------------------functions---------------*/
     void update_array( int i_org, int j_org, int player);
 

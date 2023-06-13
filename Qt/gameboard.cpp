@@ -7,6 +7,8 @@
  *-----------------------------------------------------------------
  *This functions is used when setting the gameBoard in the gameWindow class
  */
+
+int firstRound=0;
 GameBoard::GameBoard()
 {
 
@@ -191,6 +193,39 @@ void GameBoard::EnableBoard()
     }
 }
 
+int GameBoard::CanPlayerPlay(int player)
+
+{
+    if(((!playerList[(player)]->IsThereValidMoves())&&(!playerList[(player+1)%2]->IsThereValidMoves())))
+    {
+        return 0;
+    }
+    else if(((!playerList[(player)]->IsThereValidMoves())&&(!playerList[(player+1)%2]->getRemindedPieces())))
+    {
+        return 0;
+
+    }
+    else if(((!playerList[(player)]->getRemindedPieces())&&(!playerList[(player+1)%2]->IsThereValidMoves())))
+    {
+        return 0;
+    }
+    else if(((!playerList[(player)]->getRemindedPieces())&&(!playerList[(player+1)%2]->getRemindedPieces())))
+    {
+        return 0;
+    }
+    else if((((playerList[player]->getRemindedPieces()!=0)&&(!playerList[player]->IsThereValidMoves())))
+        &&((playerList[(player+1)%2]->getRemindedPieces()==0)&&(playerList[(player+1)%2]->IsThereValidMoves())))
+    {
+        return 0;
+    }
+//    else if((((playerList[player]->getRemindedPieces()!=0)&&(!playerList[player]->IsThereValidMoves())))
+//             &&((playerList[(player+1)%2]->getRemindedPieces()==0)&&(playerList[(player+1)%2]->IsThereValidMoves())))
+//    {
+//        return 0;
+//    }
+    return 1;
+
+}
 /*this function is used when two computers play together.
  *note:add comments to the function ##########################################################################################
  */
@@ -199,13 +234,19 @@ void GameBoard::computerPlay()
 
     std::string PlayerName=playerList[playerTurn]->getPlayerName().toStdString();
 
-    while((PlayerName.compare("Player")!=0)&&(!(playerList[playerTurn]->getRemindedPieces()==0&&
-             playerList[(playerTurn+1)%2]->getRemindedPieces()==0)||
-            (playerList[playerTurn]->IsThereValidMoves()==0&&playerList[(playerTurn+1)%2]->IsThereValidMoves()==0)))
+//    while(((PlayerName.compare("Player")!=0)&&(!(playerList[playerTurn]->getRemindedPieces()==0&&
+//             playerList[(playerTurn+1)%2]->getRemindedPieces()==0)||
+//            (playerList[playerTurn]->IsThereValidMoves()==0&&playerList[(playerTurn+1)%2]->IsThereValidMoves()==0)))||
+//           (!((playerList[playerTurn]->getRemindedPieces()!=0)&&(!playerList[playerTurn]->IsThereValidMoves())
+//            &&(playerList[(playerTurn+1)%2]->getRemindedPieces()==0)&&(playerList[(playerTurn+1)%2]->IsThereValidMoves()))||
 
+//    {
 
+    int a=0;
+    while((PlayerName.compare("Player")!=0)&&(((a==0)&&((PlayerName.compare("Computer")!=0)))||(CanPlayerPlay(playerTurn))))
     {
 
+        a=1;
 //        if(PlayerName.compare("Computer")!=0)
 //        {
 //        possiblePositions=getPossiblePositions(playerList[(playerTurn+1)%2]->IsPlayerMaximizer());
@@ -225,7 +266,8 @@ void GameBoard::computerPlay()
         playerList[playerTurn]->setIsThereValidMoves(possiblePositions.size());
         }
 
-        if(playerList[playerTurn]->IsThereValidMoves()&&(!(playerList[playerTurn]->getRemindedPieces()==0)))
+
+        if (playerList[playerTurn]->IsThereValidMoves()&&((playerList[playerTurn]->getRemindedPieces())))
             {
 
             qDebug()<<"playerLevel"<<playerList[playerTurn]->getPlayerLevel();
@@ -241,12 +283,17 @@ void GameBoard::computerPlay()
             playerList[playerTurn]->UpdateScore(calculateScoreForAPlayer(playerList[playerTurn]->IsPlayerMaximizer(),BoardSqaureList));
             playerList[(playerTurn+1)%2]->UpdateScore(calculateScoreForAPlayer(playerList[(playerTurn+1)%2]->IsPlayerMaximizer(),BoardSqaureList));
 
-            if(PlayerName.compare("Computer")!=0){
+//            if(PlayerName.compare("Computer")!=0){
+
+//            restartValidMovesToZero(possiblePositions);
+//            }
+            restartValidMovesToZero(possiblePositions);
 
             possiblePositions=getPossiblePositions(playerList[(playerTurn+1)%2]->IsPlayerMaximizer());
-            playerList[(playerTurn+1)%2]->setIsThereValidMoves(possiblePositions.size()?1:0);
-            restartValidMovesToZero(possiblePositions);
-            }
+            playerList[(playerTurn+1)%2]->setIsThereValidMoves(possiblePositions.size());
+
+           // restartValidMovesToZero(possiblePositions);
+          //  }
 
             playerTurn=(playerTurn+1)%2;
 
@@ -260,7 +307,7 @@ void GameBoard::computerPlay()
             {
             if((!(playerList[playerTurn]->IsThereValidMoves())&&(playerList[(playerTurn+1)%2]->IsThereValidMoves()))
                        ||((playerList[playerTurn]->getRemindedPieces()==0)&&(playerList[playerTurn]->IsThereValidMoves())))
-                      {
+               {
 
                        qDebug()<<"player1RemindedPices"<<playerList[playerTurn]->getRemindedPieces();
                         qDebug()<<"Player2RemindedPices"<<playerList[(playerTurn+1)%2]->getRemindedPieces();
@@ -287,15 +334,16 @@ void GameBoard::computerPlay()
             }
 
 
-         PlayerName=playerList[playerTurn]->getPlayerName().toStdString();
+        PlayerName=playerList[playerTurn]->getPlayerName().toStdString();
 
     }
 
 
-    if(((playerList[playerTurn]->getRemindedPieces()==0&&
-           playerList[(playerTurn+1)%2]->getRemindedPieces()==0)||
-         (playerList[playerTurn]->IsThereValidMoves()==0&&playerList[(playerTurn+1)%2]->IsThereValidMoves()==0)))
+//    if(((playerList[playerTurn]->getRemindedPieces()==0&&
+//           playerList[(playerTurn+1)%2]->getRemindedPieces()==0)||
+//         (playerList[playerTurn]->IsThereValidMoves()==0&&playerList[(playerTurn+1)%2]->IsThereValidMoves()==0)))
 
+    if(!CanPlayerPlay(playerTurn))
     {
         if(playerList[playerTurn]->getScore()>playerList[(playerTurn+1)%2]->getScore())
             playerList[playerTurn]->setWinFlag(1);
@@ -357,7 +405,6 @@ void GameBoard::GetResponseFromTheSquare(QString SquareMessage,int squareNumber)
 
     if(action.compare("Switch turns")==0)
     {
-
         BoardSqaureList[squareNumber]->setSquareState(playerList[playerTurn]->IsPlayerMaximizer());
 
         restartValidMovesToZero(possiblePositions);
@@ -374,19 +421,21 @@ void GameBoard::GetResponseFromTheSquare(QString SquareMessage,int squareNumber)
         //validMoves
 
         possiblePositions=getPossiblePositions(playerList[(playerTurn+1)%2]->IsPlayerMaximizer());
-        playerList[(playerTurn+1)%2]->setIsThereValidMoves(possiblePositions.size()?1:0);
+        playerList[(playerTurn+1)%2]->setIsThereValidMoves(possiblePositions.size());
 
 
         //win,orlost=>check
         //also,check if for two consequitive turns there is no valid moves
-        if((playerList[playerTurn]->getRemindedPieces()==0&&
-            playerList[(playerTurn+1)%2]->getRemindedPieces()==0)||
-            (playerList[playerTurn]->IsThereValidMoves()==0&&playerList[(playerTurn+1)%2]->IsThereValidMoves()==0))
+//        if((playerList[playerTurn]->getRemindedPieces()==0&&
+//            playerList[(playerTurn+1)%2]->getRemindedPieces()==0)||
+//            (playerList[playerTurn]->IsThereValidMoves()==0&&playerList[(playerTurn+1)%2]->IsThereValidMoves()==0))
+
+        if(!CanPlayerPlay(playerTurn))
         {
 
+            firstRound=1;
             //disable the board
             DisableBoard();
-
 
             if(playerList[playerTurn]->getScore()>playerList[(playerTurn+1)%2]->getScore())
                 playerList[playerTurn]->setWinFlag(1);
@@ -407,10 +456,16 @@ void GameBoard::GetResponseFromTheSquare(QString SquareMessage,int squareNumber)
             playerTurn=(playerTurn+1)%2;
             playerList[playerTurn]->UpdatePlayerTurn();
 
-            if(PlayerName.compare("Computer")!=0){
+           // if(PlayerName.compare("Computer")!=0){
 
                 if((!playerList[playerTurn]->IsThereValidMoves())||(playerList[playerTurn]->getRemindedPieces()==0))
                 {
+
+  /*added*/              if((!(playerList[playerTurn]->IsThereValidMoves())&&(playerList[(playerTurn+1)%2]->IsThereValidMoves()))
+                    ||((playerList[playerTurn]->getRemindedPieces()==0)&&(playerList[playerTurn]->IsThereValidMoves())))
+                {
+
+
                     playerList[playerTurn]->NoValidMovesThisTurn();
 
                     playerTurn=(playerTurn+1)%2;
@@ -419,10 +474,12 @@ void GameBoard::GetResponseFromTheSquare(QString SquareMessage,int squareNumber)
                     restartValidMovesToZero(possiblePositions);
 
                     possiblePositions=getPossiblePositions(playerList[playerTurn]->IsPlayerMaximizer());
-                   playerList[playerTurn]->setIsThereValidMoves(possiblePositions.size()?1:0);
+                   playerList[playerTurn]->setIsThereValidMoves(possiblePositions.size());
 
                 }
-            }
+
+                }
+           // }
        }
 
        PlayerName=playerList[playerTurn]->getPlayerName().toStdString();
@@ -430,7 +487,7 @@ void GameBoard::GetResponseFromTheSquare(QString SquareMessage,int squareNumber)
        if(PlayerName.compare("Computer")==0)
        {
         DisableBoard();
-        restartValidMovesToZero(possiblePositions);
+        //restartValidMovesToZero(possiblePositions);
         computerPlay();
 
        }
