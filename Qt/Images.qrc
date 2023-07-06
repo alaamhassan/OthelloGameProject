@@ -11,7 +11,6 @@
         <file>HomePage/chooseLevel.png</file>
         <file>HomePage/chooseMode.png</file>
         <file>HomePage/gameWindow.png</file>
-        <file>HomePage/GAMEWINDOW (2).png</file>
     </qresource>
     <qresource prefix="/BoardDisks">
         <file>OthelloDisks/DarkDisk.jpg</file>
@@ -29,5 +28,8 @@
     </qresource>
     <qresource prefix="/gameOver">
         <file>GameOver/gameOver.png</file>
+    </qresource>
+    <qresource prefix="/gameWindow">
+        <file>HomePage/gameWindowUpdated.png</file>
     </qresource>
 </RCC>

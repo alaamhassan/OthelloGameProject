@@ -74,22 +74,22 @@ GameWindow::GameWindow(QWidget *parent, QString Player1Name, QString Player2Name
 
     QString PlayStyleSheet=
         "QPushButton{"
-        "border: 5px solid #1E3706;"
+        "border: 4px solid #1E3706;"
         "border-color:#1E3706;"
-        "background-color:#90978E;"
-        "color:#1E3706;"
+        "background-color:#D9D9D9;"
+        "color:#000000;"
         "}"
 
         "QPushButton:hover{"
-        "border-color:#90978E;"
-        "background-color:#1E3706;"
-        "color:#90978E;"
+        "border-color:#1E3706;"
+        "background-color:#A6A6A6;"
+        "color:#000000;"
         "}"
 
         "QPushButton:pressed{"
-        "border-color:#90978E;"
-        "background-color:#1E3706;"
-        "color:#90978E;"
+        "border-color:#1E3706;"
+        "background-color:#A6A6A6;"
+        "color:#000000;"
         "}"
         ;
 
@@ -220,7 +220,7 @@ GameWindow::~GameWindow()
 
 void GameWindow::resizeEvent(QResizeEvent *event)
 {
-    QPixmap bkgnd(":/homePage/HomePage/GAMEWINDOW (2).png");
+    QPixmap bkgnd(":/gameWindow/HomePage/gameWindowUpdated.png");
     bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
     QPalette p = palette();
     p.setBrush(QPalette::Window, bkgnd);
