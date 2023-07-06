@@ -387,17 +387,9 @@ void GameBoard::GetResponseFromTheSquare(QString SquareMessage,int squareNumber)
         playerList[(playerTurn+1)%2]->UpdateScore(calculateScoreForAPlayer(playerList[(playerTurn+1)%2]->IsPlayerMaximizer(),BoardSqaureList));
 
 
-        //validMoves
-
         possiblePositions=getPossiblePositions(playerList[(playerTurn+1)%2]->IsPlayerMaximizer());
         playerList[(playerTurn+1)%2]->setIsThereValidMoves(possiblePositions.size());
 
-
-        //win,orlost=>check
-        //also,check if for two consequitive turns there is no valid moves
-//        if((playerList[playerTurn]->getRemindedPieces()==0&&
-//            playerList[(playerTurn+1)%2]->getRemindedPieces()==0)||
-//            (playerList[playerTurn]->IsThereValidMoves()==0&&playerList[(playerTurn+1)%2]->IsThereValidMoves()==0))
 
         if(!CanPlayerPlay(playerTurn))
         {
@@ -425,12 +417,10 @@ void GameBoard::GetResponseFromTheSquare(QString SquareMessage,int squareNumber)
             playerTurn=(playerTurn+1)%2;
             playerList[playerTurn]->UpdatePlayerTurn();
 
-           // if(PlayerName.compare("Computer")!=0){
-
                 if((!playerList[playerTurn]->IsThereValidMoves())||(playerList[playerTurn]->getRemindedPieces()==0))
                 {
 
-  /*added*/              if((!(playerList[playerTurn]->IsThereValidMoves())&&(playerList[(playerTurn+1)%2]->IsThereValidMoves()))
+                 if((!(playerList[playerTurn]->IsThereValidMoves())&&(playerList[(playerTurn+1)%2]->IsThereValidMoves()))
                     ||((playerList[playerTurn]->getRemindedPieces()==0)&&(playerList[playerTurn]->IsThereValidMoves())))
                 {
 
@@ -448,7 +438,7 @@ void GameBoard::GetResponseFromTheSquare(QString SquareMessage,int squareNumber)
                 }
 
                 }
-           // }
+
        }
 
        PlayerName=playerList[playerTurn]->getPlayerName().toStdString();
@@ -456,7 +446,6 @@ void GameBoard::GetResponseFromTheSquare(QString SquareMessage,int squareNumber)
        if(PlayerName.compare("Computer")==0)
        {
         DisableBoard();
-        //restartValidMovesToZero(possiblePositions);
         computerPlay();
 
        }
